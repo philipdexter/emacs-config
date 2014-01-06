@@ -1,0 +1,23 @@
+;; start with god-mode on
+(god-mode)
+
+;; C-\ to toggle
+(global-set-key (kbd "C-\\") 'god-local-mode)
+
+;; easier keys in god-mode
+(global-set-key (kbd "C-x C-1") 'delete-other-windows)
+(global-set-key (kbd "C-x C-2") 'split-window-below)
+(global-set-key (kbd "C-x C-3") 'split-window-right)
+(global-set-key (kbd "C-x C-0") 'delete-window)
+
+(define-key god-local-mode-map (kbd ".") 'repeat)
+
+;; overwrite toggle
+(defun god-toggle-on-overwrite ()
+  (if (bound-and-true-p overwrite-mode)
+      (god-local-mode-pause)
+    (god-local-mode-resume)))
+(add-hook 'overwrite-mode-hook 'god-toggle-on-overwrite)
+
+;; disable for modes
+(add-to-list 'god-exempt-major-modes 'haskell-interactive-mode)
