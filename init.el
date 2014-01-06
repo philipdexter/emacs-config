@@ -4,7 +4,8 @@
 (defvar packages
   '(haskell-mode
     cycle-buffer
-    god-mode))
+    god-mode
+    ace-jump-mode))
 
 ;; local config files
 (defvar configs

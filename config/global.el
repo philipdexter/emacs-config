@@ -63,3 +63,7 @@
   (let ((my-linum-current-line-number (line-number-at-pos)))
     ad-do-it))
 (ad-activate 'linum-update)
+
+;; global key bindings
+
+(define-key global-map (kbd "C-c C-s") 'ace-jump-mode)
