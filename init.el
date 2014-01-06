@@ -5,7 +5,8 @@
   '(haskell-mode
     cycle-buffer
     god-mode
-    ace-jump-mode))
+    ace-jump-mode
+    undo-tree))
 
 ;; local config files
 (defvar configs
