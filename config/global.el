@@ -27,10 +27,11 @@
 (defun replace-string-same-line (&optional lines)
   (interactive "P")
   (push-mark (point))
-  (let ((src (read-from-minibuffer "replace: "))
-        (dst (read-from-minibuffer "with: "))
-        (end (progn
-	       (forward-line lines) (end-of-line) (point))))
+  (let* ((lines (if (bound-and-true-p lines) lines 0))
+         (src (read-from-minibuffer "replace: "))
+         (dst (read-from-minibuffer "with: "))
+         (end (progn
+                (forward-line lines) (end-of-line) (point))))
     (pop-to-mark-command)
     (push-mark (point))
     (beginning-of-line)
