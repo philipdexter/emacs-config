@@ -68,6 +68,7 @@
 (define-key haskell-mode-map (kbd "C-c C-b") 'haskell-interactive-switch)
 (define-key haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
 (define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
+(define-key haskell-mode-map (kbd "C-c C-a") 'haskell-indent-align-guards-and-rhs)
 (define-key haskell-mode-map (kbd "C-c M-.") nil)
 
 ;; hook
