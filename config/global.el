@@ -41,6 +41,29 @@
 (global-set-key (kbd "C-c C-_") 'replace-string-same-line)
 (global-set-key (kbd "C-c C-/") 'replace-string-same-line)
 
+;; move lines up/down
+(defun move-line-up ()
+  (interactive)
+  (let ((col (current-column)))
+    (beginning-of-line)
+    (kill-line 1)
+    (previous-line)
+    (yank)
+    (previous-line)
+    (forward-char col)))
+(defun move-line-down ()
+  (interactive)
+  (let ((col (current-column)))
+    (beginning-of-line)
+    (kill-line 1)
+    (next-line)
+    (yank)
+    (previous-line)
+    (forward-char col)))
+(global-set-key (kbd "M-P") 'move-line-up)
+(global-set-key (kbd "M-N") 'move-line-down)
+
+
 ;; relative line numbers
 (defvar my-linum-format-string "%3d")
 
