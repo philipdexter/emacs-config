@@ -13,7 +13,8 @@
   '("global"
     "haskell"
     "cycle-buffer"
-    "god"))
+    "god"
+    "latex"))
 
 (loop for name in packages
       do (progn (unless (fboundp name)
