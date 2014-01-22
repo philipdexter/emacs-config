@@ -10,3 +10,6 @@
 [submodule "packages/undo-tree"]
 	path = packages/undo-tree
 	url = git://github.com/emacsmirror/undo-tree.git
+[submodule "packages/smex"]
+	path = packages/smex
+	url = git://github.com/nonsequitur/smex.git

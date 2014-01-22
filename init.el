@@ -6,7 +6,8 @@
     cycle-buffer
     god-mode
     ace-jump-mode
-    undo-tree))
+    undo-tree
+    smex))
 
 ;; local config files
 (defvar configs
@@ -14,7 +15,8 @@
     "haskell"
     "cycle-buffer"
     "god"
-    "latex"))
+    "latex"
+    "smex"))
 
 (loop for name in packages
       do (progn (unless (fboundp name)
