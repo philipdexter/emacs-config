@@ -39,3 +39,4 @@
 (turn-on-haskell-indent)
 (load "haskell-mode-autoloads.el")
 (add-to-list 'Info-default-directory-list "~/.emacs.d/packages/haskell-mode")
+(set-face-italic-p 'italic nil)
