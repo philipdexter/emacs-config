@@ -7,7 +7,9 @@
     god-mode
     ace-jump-mode
     undo-tree
-    smex))
+    smex
+    color-theme
+    color-theme-solarized))
 
 ;; local config files
 (defvar configs
@@ -16,7 +18,8 @@
     "cycle-buffer"
     "god"
     "latex"
-    "smex"))
+    "smex"
+    "color-theme"))
 
 (loop for name in packages
       do (progn (unless (fboundp name)
@@ -39,4 +42,3 @@
 (turn-on-haskell-indent)
 (load "haskell-mode-autoloads.el")
 (add-to-list 'Info-default-directory-list "~/.emacs.d/packages/haskell-mode")
-(set-face-italic-p 'italic nil)
