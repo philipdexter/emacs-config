@@ -1,5 +1,6 @@
-;; cool buffer switching
-(iswitchb-mode 1)
+;; ido mode
+(ido-mode t)
+(setq ido-enable-flex-matching t)
 
 ;; remove menu bar
 (menu-bar-mode -1)
