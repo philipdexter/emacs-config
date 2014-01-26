@@ -38,7 +38,8 @@
          (lines (cond
                  ((typep lines 'symbol) 0)
                  ((typep lines 'cons) 0)
-                 ((< lines 0) (abs lines))))
+                 ((< lines 0) (abs lines))
+		 (t lines)))
          (src (if special
                   (ido-completing-read "replace: "
                                    (split-string
