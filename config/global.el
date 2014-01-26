@@ -24,12 +24,26 @@
 ;; whitespace
 (setq-default show-trailing-whitespace t)
 
+;; return n lines as a string
+(defun n-lines (lines)
+  (save-excursion
+    (buffer-substring (progn (beginning-of-line 1) (point))
+                      (progn (next-line (- lines 1)) (end-of-line 1) (point)))))
+
 ;; find/replacing
 (defun replace-string-same-line (&optional lines)
   (interactive "P")
   (push-mark (point))
-  (let* ((lines (if (bound-and-true-p lines) lines 0))
-         (src (read-from-minibuffer "replace: "))
+  (let* ((special (or (typep lines 'cons) (and (typep lines 'integer) (< lines 0))))
+         (lines (cond
+                 ((typep lines 'symbol) 0)
+                 ((typep lines 'cons) 0)
+                 ((< lines 0) (abs lines))))
+         (src (if special
+                  (ido-completing-read "replace: "
+                                   (split-string
+                                    (n-lines (+ 1 lines))))
+                (read-from-minibuffer "replace: ")))
          (dst (read-from-minibuffer "with: "))
          (end (progn
                 (forward-line lines) (end-of-line) (point))))
