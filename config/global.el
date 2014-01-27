@@ -39,7 +39,7 @@
                  ((typep lines 'symbol) 0)
                  ((typep lines 'cons) 0)
                  ((< lines 0) (abs lines))
-		 (t lines)))
+                 (t lines)))
          (src (if special
                   (ido-completing-read "replace: "
                                    (split-string
@@ -56,6 +56,42 @@
     (pop-to-mark-command)))
 (global-set-key (kbd "C-c C-_") 'replace-string-same-line)
 (global-set-key (kbd "C-c C-/") 'replace-string-same-line)
+
+;; grapple left/right
+(defun grapple-left (char)
+  (interactive "cGrapple left: ")
+  (push-mark (point))
+  (search-backward (char-to-string char))
+  (forward-char))
+(defun grapple-right (char)
+  (interactive "cGrapple right: ")
+  (push-mark (point))
+  (search-forward (char-to-string char))
+  (backward-char))
+(defun grapple-out ()
+  (interactive)
+  (call-interactively 'grapple-left)
+  (call-interactively 'grapple-right))
+(defun grapple-smart (char)
+  (interactive "cGrapple out: ")
+  (let* ((left char)
+         (right
+          (cond
+           ((= ?\" left) ?\")
+           ((= ?\' left) ?\')
+           ((= ?\( left) ?\))
+           ((= ?\[ left) ?\])
+           ((= ?\{ left) ?\}))))
+    (grapple-left left)
+    (grapple-right right)))
+(global-set-key (kbd "C-c ,") 'grapple-left)
+(global-set-key (kbd "C-c C-,") 'grapple-left)
+(global-set-key (kbd "C-c .") 'grapple-right)
+(global-set-key (kbd "C-c C-.") 'grapple-right)
+(global-set-key (kbd "C-c =") 'grapple-out)
+(global-set-key (kbd "C-c C-=") 'grapple-out)
+(global-set-key (kbd "C-c -") 'grapple-smart)
+(global-set-key (kbd "C-c C--") 'grapple-out)
 
 ;; move lines up/down
 (defun move-line-up ()
