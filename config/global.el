@@ -5,6 +5,9 @@
 ;; remove menu bar
 (menu-bar-mode -1)
 
+;; always truncate long lines
+(set-default 'truncate-lines t)
+
 ;; don't show startup messages
 (setq inhibit-startup-message t)
 (setq inhibit-startup-echo-area-message t)
