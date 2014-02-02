@@ -33,6 +33,12 @@
     (buffer-substring (progn (beginning-of-line 1) (point))
                       (progn (next-line (- lines 1)) (end-of-line 1) (point)))))
 
+
+(defun zap-to-char-backwards (char)
+  (interactive "cZap to char: ")
+  (zap-to-char -1 char))
+(global-set-key (kbd "C-M-z") 'zap-to-char-backwards)
+
 ;; find/replacing
 (defun replace-string-same-line (&optional lines)
   (interactive "P")
