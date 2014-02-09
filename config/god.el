@@ -14,3 +14,16 @@
 
 ;; disable for modes
 (add-to-list 'god-exempt-major-modes 'haskell-interactive-mode)
+
+;; switch mode line color with god-mode
+(defun c/god-mode-mode-line ()
+  (let ((limited-colors-p (> 257 (length (defined-colors)))))
+    (cond (god-local-mode (progn
+			    (set-face-background 'mode-line (if limited-colors-p "color-209" "#d4552a"))
+			    (set-face-background 'mode-line-inactive (if limited-colors-p "color-209" "#d4552a"))))
+	  (t (progn
+	       (set-face-background 'mode-line (if limited-colors-p "white" "#e9e2cb"))
+	       (set-face-background 'mode-line-inactive (if limited-colors-p "white" "#e9e2cb")))))))
+
+(add-hook 'god-mode-enabled-hook 'c/god-mode-mode-line)
+(add-hook 'god-mode-disabled-hook 'c/god-mode-mode-line)
