@@ -12,12 +12,5 @@
 
 (define-key god-local-mode-map (kbd ".") 'repeat)
 
-;; overwrite toggle
-(defun god-toggle-on-overwrite ()
-  (if (bound-and-true-p overwrite-mode)
-      (god-local-mode-pause)
-    (god-local-mode-resume)))
-(add-hook 'overwrite-mode-hook 'god-toggle-on-overwrite)
-
 ;; disable for modes
 (add-to-list 'god-exempt-major-modes 'haskell-interactive-mode)
