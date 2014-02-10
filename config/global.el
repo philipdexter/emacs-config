@@ -153,3 +153,42 @@
 ;; global key bindings
 
 (define-key global-map (kbd "C-c C-s") 'ace-jump-mode)
+
+;; change mode line
+(defun plist (list)
+  (while list
+    (print (car list))
+    (setq list (cdr list))))
+
+(setq-default mode-line-format
+  (list
+   "%e"
+
+   '(:eval (when (buffer-modified-p)
+	     (propertize "*" 'face 'font-lock-type-face)))
+
+   '(:eval (when buffer-read-only
+	     "%%"))
+
+   '(:eval (propertize "%b " 'face 'font-lock-keyword-face))
+
+   '(:eval (when god-local-mode
+	     (propertize "G " 'face 'font-lock-warning-face)))
+
+   (propertize "%02l" 'face 'font-lock-type-face) (propertize "," 'face 'font-lock-type-face)
+   (propertize "%02c" 'face 'font-lock-type-face)
+
+   (propertize " " 'face 'font-lock-type-face)
+   (propertize "%p" 'face 'font-lock-type-face)
+
+   (propertize " <" 'face 'font-lock-type-face)
+   '(:eval (propertize "%m" 'face 'font-lock-string-face))
+   (propertize "> " 'face 'font-lock-type-face)
+
+   '(:eval (propertize (format-time-string "%H:%M") 'face 'font-lock-doc-face))
+
+   (propertize " --" 'face 'font-lock-type-face)
+
+   ;;'minor-mode-alist
+
+   (propertize "%-" 'face 'font-lock-type-face)))
