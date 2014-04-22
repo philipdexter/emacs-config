@@ -12,4 +12,4 @@
 		 (end (region-end)))
 	     (replace-regexp "\\([.,?:;!]\\)\s+" "\\1
 " nil begin end)))))
-(define-key latex-mode-map (kbd "C-c q") 'fill-using-punctuation)
+(define-key tex-mode-map (kbd "C-c q") 'fill-using-punctuation)
