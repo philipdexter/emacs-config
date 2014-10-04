@@ -168,6 +168,18 @@
                                  answer)))))))
 (global-set-key (kbd "C-c +") 'increment-number-decimal)
 
+;; recenter horizontally
+(defun my-horizontal-recenter ()
+  "make the point horizontally centered in the window"
+  (interactive)
+  (let ((mid (/ (window-width) 2))
+	(line-len (save-excursion (end-of-line) (current-column)))
+	(cur (current-column)))
+    (if (< mid cur)
+	(set-window-hscroll (selected-window)
+			    (- cur mid)))))
+(global-set-key (kbd "C-x l") 'my-horizontal-recenter)
+
 ;; global key bindings
 
 (define-key global-map (kbd "C-c C-s") 'ace-jump-mode)
