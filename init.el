@@ -9,7 +9,8 @@
     undo-tree
     smex
     color-theme
-    color-theme-solarized))
+    color-theme-solarized
+    idris-mode))
 
 ;; local config files
 (defvar configs
