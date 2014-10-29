@@ -10,7 +10,8 @@
     smex
     color-theme
     color-theme-solarized
-    idris-mode))
+    idris-mode
+    markdown-mode))
 
 ;; local config files
 (defvar configs
@@ -20,7 +21,8 @@
     "god"
     "latex"
     "smex"
-    "color-theme"))
+    "color-theme"
+    "markdown"))
 
 (loop for name in packages
       do (progn (unless (fboundp name)
