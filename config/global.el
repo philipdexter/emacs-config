@@ -5,6 +5,9 @@
 ;; remove menu bar
 (menu-bar-mode -1)
 
+;; turn off electric-indent-mode
+(set-default 'electric-indent-mode nil)
+
 ;; always truncate long lines
 (set-default 'truncate-lines t)
 
