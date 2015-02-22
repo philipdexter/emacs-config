@@ -22,7 +22,8 @@
     "latex"
     "smex"
     "color-theme"
-    "markdown"))
+    "markdown"
+    "java"))
 
 (loop for name in packages
       do (progn (unless (fboundp name)
