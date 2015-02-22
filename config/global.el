@@ -150,7 +150,9 @@
 			(if (= 0 offset)
 			    line-number
 			    (abs offset))
-			) 'face 'idris-semantic-bound-face)))
+			) 'face (if (= 0 offset)
+				    'outline-7
+				    'idris-semantic-bound-face))))
 
 (defadvice linum-update (around my-linum-update)
   (let ((my-linum-current-line-number (line-number-at-pos)))
