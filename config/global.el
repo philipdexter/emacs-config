@@ -146,7 +146,11 @@
 
 (defun my-linum-relative-line-numbers (line-number)
   (let ((offset (- line-number my-linum-current-line-number)))
-    (propertize (format my-linum-format-string (abs offset)) 'face 'linum)))
+    (propertize (format my-linum-format-string
+			(if (= 0 offset)
+			    line-number
+			    (abs offset))
+			) 'face 'idris-semantic-bound-face)))
 
 (defadvice linum-update (around my-linum-update)
   (let ((my-linum-current-line-number (line-number-at-pos)))
