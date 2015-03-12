@@ -2,6 +2,9 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 
+;; require final newline
+(setq-default require-final-newline t)
+
 ;; remove menu bar
 (menu-bar-mode -1)
 
