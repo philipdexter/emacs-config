@@ -11,8 +11,7 @@
     color-theme
     color-theme-solarized
     idris-mode
-    markdown-mode
-    ProofGeneral))
+    markdown-mode))
 
 ;; local config files
 (defvar configs
