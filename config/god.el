@@ -14,3 +14,5 @@
 
 ;; disable for modes
 (add-to-list 'god-exempt-major-modes 'haskell-interactive-mode)
+(add-to-list 'god-exempt-major-modes 'idris-repl-mode)
+(add-to-list 'god-exempt-major-modes 'idris-metavariable-list-mode)
