@@ -11,7 +11,8 @@
     color-theme
     color-theme-solarized
     idris-mode
-    markdown-mode))
+    markdown-mode
+    ProofGeneral))
 
 ;; local config files
 (defvar configs
@@ -24,7 +25,8 @@
     "color-theme"
     "markdown"
     "java"
-    "idris"))
+    "idris"
+    "coq"))
 
 (loop for name in packages
       do (progn (unless (fboundp name)
