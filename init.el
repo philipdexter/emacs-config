@@ -23,7 +23,8 @@
     "smex"
     "color-theme"
     "markdown"
-    "java"))
+    "java"
+    "idris"))
 
 (loop for name in packages
       do (progn (unless (fboundp name)
