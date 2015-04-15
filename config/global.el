@@ -195,6 +195,7 @@
 ;; global key bindings
 
 (define-key global-map (kbd "C-c C-s") 'ace-jump-mode)
+(define-key global-map (kbd "C-x r t") 'string-insert-rectangle)
 
 ;; change mode line
 (defun plist (list)
