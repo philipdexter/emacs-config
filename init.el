@@ -12,7 +12,8 @@
     color-theme-solarized
     idris-mode
     markdown-mode
-    nix-mode))
+    nix-mode
+    rust-mode))
 
 ;; local config files
 (defvar configs
