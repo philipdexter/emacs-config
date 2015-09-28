@@ -13,7 +13,8 @@
     idris-mode
     markdown-mode
     nix-mode
-    rust-mode))
+    rust-mode
+    tuareg))
 
 ;; local config files
 (defvar configs
@@ -27,7 +28,8 @@
     "markdown"
     "java"
     "idris"
-    "coq"))
+    "coq"
+    "ocaml"))
 
 (loop for name in packages
       do (progn (unless (fboundp name)
