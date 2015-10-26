@@ -1,0 +1,5 @@
+(defun ocaml-find-hook()
+  (let ((fn (buffer-file-name)))
+    (when (string-match "\\.ml$" fn)
+      (tuareg-mode))))
+(add-hook 'find-file-hooks 'ocaml-find-hook)
