@@ -29,6 +29,7 @@
     "java"
     "idris"
     "coq"
+    "c"
     "ocaml"))
 
 (loop for name in packages
