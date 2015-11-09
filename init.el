@@ -29,6 +29,7 @@
     "java"
     "idris"
     "coq"
+    "agda"
     "c"
     "ocaml"))
 
