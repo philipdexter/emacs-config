@@ -1,5 +1,5 @@
-;; start with god-mode on
-(god-mode)
+;; uncomment to start with god-mode on
+;; (god-mode)
 
 ;; C-\ to toggle
 (global-set-key (kbd "C-\\") 'god-local-mode)
