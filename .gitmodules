@@ -28,3 +28,21 @@
 [submodule "packages/tuareg"]
 	path = packages/tuareg
 	url = git://github.com/ocaml/tuareg.git
+[submodule "packages/company-coq"]
+	path = packages/company-coq
+	url = git@github.com:cpitclaudel/company-coq
+[submodule "packages/company"]
+	path = packages/company
+	url = git@github.com:company-mode/company-mode
+[submodule "packages/company-math"]
+	path = packages/company-math
+	url = git@github.com:vspinu/company-math
+[submodule "packages/math-symbol-lists"]
+	path = packages/math-symbol-lists
+	url = git@github.com:vspinu/math-symbol-lists
+[submodule "packages/dash"]
+	path = packages/dash
+	url = git@github.com:magnars/dash.el
+[submodule "packages/yasnippet"]
+	path = packages/yasnippet
+	url = git@github.com:capitaomorte/yasnippet
