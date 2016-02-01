@@ -74,7 +74,7 @@ not listed here, you may not get the correct syntax colouring behaviour.")
    ;; This colour is quite subjective and may be best chosen according
    ;; to the type of display you have.
    (:background "#eaf8ff")
-   (:background "darkslateblue")
+   (:background "navy")
    (:underline t))
   "*Face for locked region of proof script (processed commands)."
   :group 'proof-faces)

@@ -27,4 +27,7 @@
       (define-key coq-mode-map (kbd "M-RET") 'proof-goto-point))))
 (add-hook 'find-file-hooks 'coq-find-hook)
 
+(custom-set-faces
+ '(proof-locked-face ((t (:background "color-123" :underline nil)))))
+
 ; (add-to-list 'auto-mode-alist '("\\.v$" . coq-mode))
