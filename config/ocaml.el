@@ -1,5 +1,10 @@
+
 (defun ocaml-find-hook()
   (let ((fn (buffer-file-name)))
-    (when (string-match "\\.ml$" fn)
-      (tuareg-mode))))
+    (when (or
+	   (string-match "\\.ml$" fn)
+	   (string-match "\\.mli$" fn))
+      (progn
+	(setq-default indent-tabs-mode nil)
+	(tuareg-mode)))))
 (add-hook 'find-file-hooks 'ocaml-find-hook)
