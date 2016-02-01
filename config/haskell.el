@@ -1,6 +1,5 @@
-(require 'haskell-mode)
+(require 'haskell-mode-autoloads)
 (require 'haskell-indent)
-(require 'haskell-interactive-mode)
 
 ;; functions
 
@@ -73,5 +72,4 @@
 
 ;; hook
 
-(custom-set-variables
- '(haskell-mode-hook '(turn-on-haskell-indent)))
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)

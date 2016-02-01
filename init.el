@@ -50,6 +50,3 @@
       do (load (concat (file-name-directory load-file-name)
                        "config/"
                        name ".el")))
-
-(turn-on-haskell-indent)
-(load "haskell-mode-autoloads.el")
