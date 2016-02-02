@@ -14,7 +14,12 @@
     markdown-mode
     nix-mode
     rust-mode
-    tuareg))
+    tuareg
+    dash
+    s
+    f
+    let-alist
+    elm-mode))
 
 ;; local config files
 (defvar configs
