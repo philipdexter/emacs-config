@@ -36,7 +36,8 @@
     "coq"
     "agda"
     "c"
-    "ocaml"))
+    "ocaml"
+    "magit"))
 
 (loop for name in packages
       do (progn (unless (fboundp name)
