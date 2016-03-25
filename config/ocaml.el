@@ -7,6 +7,8 @@
 	   (string-match "\\.mli$" fn))
       (progn
 	(setq-default indent-tabs-mode nil)
+	(add-to-list 'load-path "~/.emacs.d/packages/company")
+	(require 'company)
 	(autoload 'merlin-mode "merlin" "Merlin mode" t)
 	(add-hook 'tuareg-mode-hook 'merlin-mode)
 	(add-hook 'caml-mode-hook 'merlin-mode)
