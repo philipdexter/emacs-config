@@ -37,6 +37,9 @@
       (define-key coq-mode-map (kbd "M-RET") 'proof-goto-point))))
 (add-hook 'find-file-hooks 'coq-find-hook)
 
+(custom-set-variables
+  '(coq-prog-args '("-R" "/home/philip/coq/cpdt/src" "Cpdt")))
+
 (custom-set-faces
  '(proof-locked-face ((t (:background "color-123" :underline nil)))))
 
