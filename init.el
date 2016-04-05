@@ -5,7 +5,6 @@
   '(haskell-mode
     cycle-buffer
     ace-jump-mode
-    undo-tree
     smex
     color-theme
     color-theme-solarized
