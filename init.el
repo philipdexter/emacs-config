@@ -3,7 +3,6 @@
 ;; locally installed packages
 (defvar packages
   '(haskell-mode
-    cycle-buffer
     ace-jump-mode
     smex
     color-theme
