@@ -4,7 +4,6 @@
 (defvar packages
   '(haskell-mode
     cycle-buffer
-    god-mode
     ace-jump-mode
     undo-tree
     smex
@@ -26,7 +25,6 @@
   '("global"
     "haskell"
     "cycle-buffer"
-    "god"
     "latex"
     "smex"
     "color-theme"
