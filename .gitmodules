@@ -16,9 +16,6 @@
 [submodule "packages/idris-mode"]
 	path = packages/idris-mode
 	url = git://github.com/idris-hackers/idris-mode.git
-[submodule "packages/rust-mode"]
-	path = packages/rust-mode
-	url = git@github.com:rust-lang/rust-mode
 [submodule "packages/tuareg"]
 	path = packages/tuareg
 	url = git://github.com/ocaml/tuareg.git

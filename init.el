@@ -10,7 +10,6 @@
     color-theme-solarized
     idris-mode
     markdown-mode
-    rust-mode
     tuareg
     dash
     s
