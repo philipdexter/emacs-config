@@ -3639,6 +3639,10 @@ parsed by ProofGeneral to guess the command line option. In this example
 the command line built by Proofgeneral will be `coqtop -foo3 -R foo bar
 -I foo2'.
 
+_Remarque:_ `-arg' must be followed by one and only one option to pass
+to coqtop/coqc, use several `-arg' to issue several options. One per
+line (limitation of proofgeneral).
+
 This is the recommended way of configuring coqtop options for coq
 compilation, CoqIde and Proofgeneral. Its main advantage is that it
 avoids duplicating informations between these three tools.
@@ -5700,43 +5704,43 @@ Node: LEGO customizations150707
 Node: Coq Proof General151250
 Node: Coq-specific commands151751
 Node: Using the Coq project file152924
-Node: Changing the name of the coq project file154455
-Node: Disabling the coq project file mechanism155334
-Node: Multiple File Support155913
-Node: Automatic Compilation in Detail159330
-Node: Locking Ancestors164272
-Node: Customizing Coq Multiple File Support165897
-Node: Current Limitations176570
-Node: Editing multiple proofs177454
-Node: User-loaded tactics178684
-Node: Holes feature181103
-Node: Proof-Tree Visualization182414
-Node: Isabelle Proof General183327
-Node: Choosing logic and starting isabelle184205
-Node: Isabelle commands186813
-Node: Isabelle settings189945
-Node: Isabelle customizations190650
-Node: HOL Light Proof General191016
-Node: Shell Proof General192748
-Node: Obtaining and Installing194164
-Node: Obtaining Proof General194632
-Node: Installing Proof General from tarball195577
-Node: Setting the names of binaries196449
-Node: Notes for syssies197488
-Node: Bugs and Enhancements200085
-Node: References200989
-Node: History of Proof General201996
-Node: Old News for 3.0206030
-Node: Old News for 3.1209785
-Node: Old News for 3.2211055
-Node: Old News for 3.3214107
-Node: Old News for 3.4215116
-Node: Old News for 3.5216283
-Node: Old News for 3.6216451
-Node: Old News for 3.7216663
-Node: Function Index218132
-Node: Variable Index226983
-Node: Keystroke Index234241
-Node: Concept Index240357
+Node: Changing the name of the coq project file154631
+Node: Disabling the coq project file mechanism155510
+Node: Multiple File Support156089
+Node: Automatic Compilation in Detail159506
+Node: Locking Ancestors164448
+Node: Customizing Coq Multiple File Support166073
+Node: Current Limitations176746
+Node: Editing multiple proofs177630
+Node: User-loaded tactics178860
+Node: Holes feature181279
+Node: Proof-Tree Visualization182590
+Node: Isabelle Proof General183503
+Node: Choosing logic and starting isabelle184381
+Node: Isabelle commands186989
+Node: Isabelle settings190121
+Node: Isabelle customizations190826
+Node: HOL Light Proof General191192
+Node: Shell Proof General192924
+Node: Obtaining and Installing194340
+Node: Obtaining Proof General194808
+Node: Installing Proof General from tarball195753
+Node: Setting the names of binaries196625
+Node: Notes for syssies197664
+Node: Bugs and Enhancements200261
+Node: References201165
+Node: History of Proof General202172
+Node: Old News for 3.0206206
+Node: Old News for 3.1209961
+Node: Old News for 3.2211231
+Node: Old News for 3.3214283
+Node: Old News for 3.4215292
+Node: Old News for 3.5216459
+Node: Old News for 3.6216627
+Node: Old News for 3.7216839
+Node: Function Index218308
+Node: Variable Index227159
+Node: Keystroke Index234417
+Node: Concept Index240533
 
 End Tag Table

@@ -183,6 +183,7 @@ so for the following reasons:
      ("eauto with" "eaw" "eauto with @{db}" t)
      ("eauto" "ea" "eauto" t "eauto")
      ("econstructor" "econs" "econstructor" t "econstructor")
+     ("edestruct" "edes" "edestruct " t  "edestruct")
      ("eexists" "eex" "eexists" t "eexists")
      ("eleft" "eleft" "eleft" t "eleft")
      ("elim using" "elu" "elim # using #" t)
@@ -225,10 +226,12 @@ so for the following reasons:
      ("inversion_clear" "invcl" "inversion_clear" t "inversion_clear")
      ("lapply" "lap" "lapply" t "lapply")
      ("lazy" "lazy" "lazy beta [#] delta iota zeta" t "lazy")
+     ("lazymatch with" "m" "lazymatch # with\n| # => #\nend")
      ("left" "left" "left" t "left")
      ("linear" "lin" "linear" t "linear")
      ("load" "load" "load" t "load")
      ("move after" "mov" "move # after #" t "move")
+     ("multimatch with" "m" "multimatch # with\n| # => #\nend")
      ("now_show" nil "now_show" t "now_show")     
      ("omega" "o" "omega" t "omega")
      ("pattern" "pat" "pattern" t "pattern")
@@ -326,6 +329,7 @@ so for the following reasons:
      ("fourier" "four" "fourier" t "fourier")
      ("fail" "fa" "fail" nil)
      ("field" "field" "field" t "field")
+     ("gfail" "gfa" "gfail" nil "gfail")
      ("omega" "o" "omega" t "omega")
      ("reflexivity" "refl" "reflexivity #" t "reflexivity")
      ("ring" "ring" "ring #" t "ring")
@@ -371,6 +375,7 @@ so for the following reasons:
                                         ;    ("orelse" nil "orelse #" t "orelse")
      ("repeat" nil "repeat #" nil "repeat")
      ("try" nil "try #" nil "try")
+     ("tryif" "tryif" "tryif # then # else #" nil "tryif")
      ("progress" nil "progress #" nil "progress")
      ("|" nil "[ # | # ]" nil)
      ("||" nil "# || #" nil)
@@ -395,6 +400,7 @@ so for the following reasons:
     ("Hint Rewrite <-" "hrw" "Hint Rewrite <- @{t1,t2...} using @{tac} : @{db}." t )
     ("Hint Unfold" "hu" "Hint Unfold # : #." t "Hint\\s-+Unfold")
     ("Existing Instance" nil "Existing Instance " t "Existing\\s-+Instance")
+    ("Existing Instances" nil "Existing Instances " t "Existing\\s-+Instances")
     ("Hypothesis" "hyp" "Hypothesis #: #" t "Hypothesis")
     ("Hypotheses" "hyp" "Hypotheses #: #" t "Hypotheses")
     ("Parameter" "par" "Parameter #: #" t "Parameter")
@@ -559,6 +565,7 @@ so for the following reasons:
      ("Add Setoid" nil "Add Setoid #." t "Add\\s-+Setoid")
      ("Admit Obligations" "oblsadmit" "Admit Obligations." nil "Admit\\s-+Obligations")
      ("Arguments Scope" "argsc" "Arguments Scope @{id} [ @{_} ]" t "Arguments\\s-+Scope")
+     ("Arguments" "args" "Arguments @{id} : @{rule}" t "Arguments")
      ("Bind Scope" "bndsc" "Bind Scope @{scope} with @{type}" t "Bind\\s-+Scope")
      ("Canonical Structure" nil "Canonical Structure #." t "Canonical\\s-+Structure")
      ("Cd" nil "Cd #." nil "Cd")
@@ -744,29 +751,29 @@ so for the following reasons:
 (defun coq-module-opening-p (str)
   "Decide whether STR is a module or section opening or not.
 Used by `coq-goal-command-p'"
-  (let* ((match (coq-count-match "\\<match\\>" str))
-         (with (coq-count-match "\\<with\\>" str))
-         (letwith (+ (coq-count-match "\\<let\\>" str) (- with match)))
+  (let* ((match (coq-count-match "\\_<match\\_>" str))
+         (with (coq-count-match "\\_<with\\_>" str))
+         (letwith (+ (coq-count-match "\\_<let\\_>" str) (- with match)))
          (affect (coq-count-match ":=" str)))
-    (and (proof-string-match "\\`\\(Module\\)\\>" str)
+    (and (proof-string-match "\\`\\(Module\\)\\_>" str)
          (= letwith affect))))
 
 (defun coq-section-command-p (str)
-  (proof-string-match "\\`\\(Section\\|Chapter\\)\\>" str))
+  (proof-string-match "\\`\\(Section\\|Chapter\\)\\_>" str))
 
 ;; unused anymore (for good)
 (defun coq-goal-command-str-p (str)
   "Decide syntactically whether STR is a goal start or not. Use
 `coq-goal-command-p' on a span instead if possible."
   (let* ((match (coq-count-match "\\_<match\\_>" str))
-         (with (- (coq-count-match "\\_<with\\_>" str) (coq-count-match "\\<with\\s-+signature\\>" str)))
+         (with (- (coq-count-match "\\_<with\\_>" str) (coq-count-match "\\_<with\\s-+signature\\_>" str)))
          (letwith (+ (coq-count-match "\\_<let\\_>" str) (- with match)))
          (affect (coq-count-match ":=" str)))
     (and (proof-string-match coq-goal-command-regexp str)
          (not
           (and
            (proof-string-match
-            (concat "\\`\\(Local\\|Definition\\|Lemma\\|Theorem\\|Fact\\|Add\\|Let\\|Program\\|Module\\|Class\\|Instance\\)\\>")
+            (concat "\\`\\(Local\\|Definition\\|Lemma\\|Theorem\\|Fact\\|Add\\|Let\\|Program\\|Module\\|Class\\|Instance\\)\\_>")
             str)
            (not (= letwith affect))))
          (not (proof-string-match "\\`Declare\\s-+Module\\(\\w\\|\\s-\\|<\\)*:"
@@ -806,8 +813,8 @@ It is used:
 (defun coq-save-command-p (span str)
   "Decide whether argument is a Save command or not"
   (or (proof-string-match coq-save-command-regexp-strict str)
-      (and (proof-string-match "\\`Proof\\>" str)
-           (not (proof-string-match "Proof\\s-*\\(\\.\\|\\<with\\>\\|using\\)" str)))))
+      (and (proof-string-match "\\`Proof\\_>" str)
+           (not (proof-string-match "\\`Proof\\s-*\\(\\.\\|\\_<with\\_>\\|\\_<using\\_>\\)" str)))))
 
 
 ;; ----- keywords for font-lock.
@@ -868,6 +875,8 @@ It is used:
   (coq-build-regexp-list-from-db coq-tacticals-db)
   "Keywords for tacticals in a Coq script.")
 
+(defvar coq-symbol-binders "\\_<∀\\_>\\|\\_<∃\\_>\\|\\_<λ\\_>")
+
 
  ;; From JF Monin:
 (defvar coq-reserved
@@ -875,6 +884,7 @@ It is used:
    coq-user-reserved-db
    '(
      "False" "True" "after" "as" "cofix" "fix" "forall" "fun" "match"
+     "lazymatch" "multimatch"
      "return" "struct" "else" "end" "if" "in" "into" "let" "then"
      "using" "with" "beta" "delta" "iota" "zeta" "after" "until"
      "at" "Sort" "Time" "dest" "where"
@@ -882,9 +892,12 @@ It is used:
      "is" "nosimpl" "of"))
   "Reserved keywords of Coq.")
 
-(defvar coq-reserved-regexp 
-  (concat "\\<with\\s-+signature\\>\\|"
-   (proof-ids-to-regexp coq-reserved) ))
+;; FIXME: ∀ and ∃ should be followed by a space in coq syntax.
+;; FIXME: actually these are not exactly reserved keywords, find
+;; another classification of keywords.
+(defvar coq-reserved-regexp
+  (concat "\\_<with\\s-+signature\\_>\\|"
+   (proof-ids-to-regexp coq-reserved)))
 
 (defvar coq-state-changing-tactics
   (coq-build-regexp-list-from-db coq-tactics-db 'filter-state-changing))
@@ -946,11 +959,11 @@ It is used:
 (defvar coq-shell-eager-annotation-start
    "\376\\|\\[Reinterning\\|Warning:\\|TcDebug \\|<infomsg>")
 
-(defvar coq-id proof-id)
-(defvar coq-id-shy "@?\\(?:\\w\\|\\s_\\)+")
+(defvar coq-id "\\(@\\|_\\|\\w\\)\\(\\w\\|\\s_\\)*") ;; Coq ca start an id with @ or _
+(defvar coq-id-shy "\\(?:@\\|_\\|\\w\\)\\(?:\\w\\|\\s_\\)*")
 
 ; do not use proof-ids with a space separator! 
-(defvar coq-ids (concat proof-id "\\(" "\\s-+" proof-id "\\)*"))
+(defvar coq-ids (concat coq-id "\\(" "\\s-+" coq-id "\\)*"))
 
 (defun coq-first-abstr-regexp (paren end)
   (concat paren "\\s-*\\(" coq-ids "\\)\\s-*" end))
@@ -960,22 +973,29 @@ It is used:
   :type 'boolean
   :group 'coq)
 
+(defconst coq-lambda-regexp "\\(?:\\_<fun\\_>\\|\\_<λ\\_>\\)")
+
+(defconst coq-forall-regexp "\\(?:\\_<forall\\_>\\|\\_<∀\\_>\\)")
+(defconst coq-exists-regexp "\\(?:\\_<exists\\_>\\|\\_<∃\\_>\\)")
 
 (defvar coq-font-lock-terms
-  (if coq-variable-highlight-enable
-  (list
-   ;; lambda binders
-   (list (coq-first-abstr-regexp "\\<fun\\>" "\\(?:=>\\|:\\)") 1 'font-lock-variable-name-face)
-   ;; forall binder
-   (list (coq-first-abstr-regexp "\\<forall\\>" "\\(?:,\\|:\\)") 1 'font-lock-variable-name-face)
+  (cons
+   (cons coq-symbol-binders 'coq-symbol-binder-face)
+   (if coq-variable-highlight-enable
+       (list
+        ;; lambda binders
+        (list (coq-first-abstr-regexp coq-lambda-regexp "\\(?:=>\\|:\\|,\\)") 1 'font-lock-variable-name-face)
+        ;; forall binder
+        (list (coq-first-abstr-regexp coq-forall-regexp "\\(?:,\\|:\\)") 1 'font-lock-variable-name-face)
+        (list (coq-first-abstr-regexp coq-exists-regexp "\\(?:,\\|:\\)") 1 'font-lock-variable-name-face)
                                         ;   (list "\\<forall\\>"
                                         ;         (list 0 font-lock-type-face)
                                         ;         (list (concat "[^ :]\\s-*\\(" coq-ids "\\)\\s-*") nil nil
                                         ;               (list 0 font-lock-variable-name-face)))
-   ;; parenthesized binders
-   (list (coq-first-abstr-regexp "(" ":[ a-zA-Z]") 1 'font-lock-variable-name-face)
-   (list (coq-first-abstr-regexp "{" ":[ a-zA-Z]") 1 'font-lock-variable-name-face)
-   ))
+        ;; parenthesized binders
+        (list (coq-first-abstr-regexp "(" ":[ a-zA-Z]") 1 'font-lock-variable-name-face)
+        (list (coq-first-abstr-regexp "{" ":[ a-zA-Z]") 1 'font-lock-variable-name-face)
+        )))
   "*Font-lock table for Coq terms.")
 
 
@@ -1030,7 +1050,7 @@ It is used:
 ;;"\\<Prop\\>\\|\\<Set\\>\\|\\<Type\\>"
 
 ;; (defconst coq-require-command-regexp
-;;   (concat "Require\\s-+\\(" proof-id "\\)")
+;;   (concat "Require\\s-+\\(" coq-id "\\)")
 ;;   "Regular expression matching Require commands in Coq.
 ;; Group number 1 matches the name of the library which is required.")
 
@@ -1065,21 +1085,24 @@ It is used:
    (append
     coq-font-lock-terms
     (list
+     (cons coq-reserved-regexp 'font-lock-type-face)
      (cons coq-keywords-regexp 'font-lock-keyword-face)
      (cons coq-shell-eager-annotation-start 'proof-warning-face)
      (cons coq-error-regexp 'proof-error-face)
      (cons (proof-regexp-alt-list-symb (list "In environment" "The term" "has type")) 'proof-error-face)
      (cons (proof-regexp-alt-list-symb (list "Set" "Type" "Prop")) 'font-lock-type-face)
+     (list (concat "[?]" coq-id) 0 'proof-eager-annotation-face);; highlight evars
      ;; ", " is for multiple hypothesis diplayed in v8.5.
-     (cons "^ *\\([^\n :(),]\\|, \\)+ *:" 'proof-declaration-name-face)
-     (list "^\\([^ \n]+\\) \\(is defined\\)"
-           (list 1 'font-lock-function-name-face t)))))
+     (cons "^ \\{0,2\\}\\([^\n :(),]\\|, \\)+ *:" 'proof-declaration-name-face)
+     (list "^\\([^ \n]+\\) \\(is defined\\)" (list 1 'font-lock-function-name-face t)))))
 
 (defvar coq-goals-font-lock-keywords
    (append
     coq-font-lock-terms
     (list
-     (cons "^ *\\([^ \n:()=]\\|, \\)+ *:" 'proof-declaration-name-face)
+     (cons coq-reserved-regexp 'font-lock-type-face)
+     (list (concat "[?]" coq-id) 0 'proof-eager-annotation-face);; highlight evars
+     (cons "^ \\{0,2\\}\\([^ \n:()=]\\|, \\)+ *:" 'proof-declaration-name-face)
      (cons (proof-regexp-alt-list-symb (list "Set" "Type" "Prop")) 'font-lock-type-face))))
 
 
@@ -1099,6 +1122,9 @@ It is used:
   (modify-syntax-entry ?\& ".")
   (modify-syntax-entry ?_  "_")
   (modify-syntax-entry ?\' "_")
+  (modify-syntax-entry ?∀ "_")
+  (modify-syntax-entry ?∃ "_")
+  (modify-syntax-entry ?λ "_") ;; maybe a bad idea... lambda is a letter
   (modify-syntax-entry ?\| ".")
 
   ;; should maybe be "_" but it makes coq-find-and-forget (in coq.el) bug

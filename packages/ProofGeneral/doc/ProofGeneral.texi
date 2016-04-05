@@ -1,6 +1,6 @@
 \input texinfo
 @c
-@c ProofGeneral.texi,v 12.25 2015/03/13 19:34:11 da Exp
+@c ProofGeneral.texi,v 12.26 2015/03/26 16:40:23 pier Exp
 @c
 @c
 @c TODO:  
@@ -60,7 +60,7 @@
 @set version 4.3pre
 @set emacsversion 24.4
 @set last-update April 2015
-@set rcsid ProofGeneral.texi,v 12.25 2015/03/13 19:34:11 da Exp
+@set rcsid ProofGeneral.texi,v 12.26 2015/03/26 16:40:23 pier Exp
 
 @dircategory Theorem proving
 @direntry
@@ -4324,6 +4324,10 @@ tool to generate a Makefile (see Coq documentation for details). It is
 parsed by ProofGeneral to guess the command line option. In this example
 the command line built by Proofgeneral will be @code{coqtop -foo3 -R foo
 bar -I foo2}.
+
+@emph{Remarque:} @code{-arg} must be followed by one and only one option
+to pass to coqtop/coqc, use several @code{-arg} to issue several
+options. One per line (limitation of proofgeneral).
 
 This is the recommended way of configuring coqtop options for coq
 compilation, CoqIde and Proofgeneral. Its main advantage is that it

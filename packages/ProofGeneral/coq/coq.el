@@ -4,7 +4,7 @@
 ;; License:     GPL (GNU GENERAL PUBLIC LICENSE)
 ;; Maintainer: Pierre Courtieu <Pierre.Courtieu@cnam.fr>
 ;;
-;; coq.el,v 11.195 2015/03/13 14:11:31 pier Exp
+;; coq.el,v 11.207 2015/06/23 13:07:01 pier Exp
 
 
 
@@ -112,8 +112,8 @@ Set to t if you want this feature."
   :group 'coq)
 
 (defconst coq-shell-init-cmd
-  (format "Set Undo %s . " coq-default-undo-limit)
-  "Command to initialize the Coq Proof Assistant.")
+  `(,(format "Set Undo %s . " coq-default-undo-limit) "Set Printing Width 75.") 
+ "Command to initialize the Coq Proof Assistant.")
 
 (require 'coq-syntax)
 ;; FIXME: Even if we don't use coq-indent for indentation, we still need it for
@@ -722,23 +722,31 @@ the *goals* buffer."
 (defun coq-remove-trailing-dot (s)
   "Return the string S without its trailing \".\" if any.
 Return nil if S is nil."
-  (if (and s (string-match "\\.\\>" s))
+  (if (and s (string-match "\\.\\'" s))
       (substring s 0 (- (length s) 1))
     s))
 
+(defun coq-is-symbol-or-punct (c)
+  "Return non nil if character C is a punctuation or a symbol constituent.
+If C is nil, return nil."
+  (when c
+    (or (equal (char-syntax c) ?\.) (equal (char-syntax c) ?\_))))
+
 (defun coq-grab-punctuation-left (pos)
+  "Return a string made of punctuations chars found immediately before position POS."
   (let ((res nil)
         (currpos pos))
-    (while (equal (char-syntax (char-before currpos)) ?\.)
+    (while (coq-is-symbol-or-punct (char-before currpos))
       (setq res (concat (char-to-string (char-before currpos)) res))
       (setq currpos (- currpos 1)))
     res))
 
 
 (defun coq-grab-punctuation-right (pos)
+  "Return a string made of punctuations chars found immediately after position POS."
   (let ((res nil)
         (currpos pos))
-    (while (equal (char-syntax (char-after currpos)) ?\.)
+    (while (coq-is-symbol-or-punct (char-after currpos))
       (setq res (concat res (char-to-string (char-after currpos))))
       (setq currpos (+ currpos 1)))
     res))
@@ -751,6 +759,8 @@ Support dot.notation.of.modules."
      (concat (coq-grab-punctuation-left pos)
              (coq-grab-punctuation-right pos)))))
 
+(defun coq-string-starts-with-symbol (s)
+  (eq 0 (string-match "\\s_" symbclean)))
 
 ;; remove trailing dot if any.
 (defun coq-id-at-point ()
@@ -761,10 +771,13 @@ Support dot.notation.of.modules."
                  ((fboundp 'symbol-near-point) (symbol-near-point))
                  ((fboundp 'symbol-at-point) (symbol-at-point))))
           (symbclean (when symb (coq-remove-trailing-dot (symbol-name symb)))))
-     (when (and symb (not (zerop (length symbclean)))) symbclean))))
+     (when (and symb (not (zerop (length symbclean)))
+                (not (coq-string-starts-with-symbol symb)))
+       symbclean))))
+
 
 (defun coq-id-or-notation-at-point ()
-  (or (coq-id-at-point) (coq-notation-at-position (point))))
+  (or (coq-id-at-point) (concat "\"" (coq-notation-at-position (point)) "\"")))
 
 
 (defcustom coq-remap-mouse-1 nil
@@ -814,6 +827,7 @@ Otherwise propose identifier at point if any."
            ((use-region-p)
             (buffer-substring-no-properties (region-beginning) (region-end)))
            (t (coq-id-or-notation-at-point)))))
+    (message "YOUHOU: %S" guess) 
     (read-string
      (if guess (concat s " (default " guess "): ") (concat s ": "))
      nil 'proof-minibuffer-history guess)))
@@ -888,7 +902,7 @@ More precisely it executes SETCMD, then DO id and finally silently UNSETCMD."
   (concat "[ " s " ]"))
 
 (defsubst coq-put-into-double-quote-if-notation (s)
-  (if (equal (char-syntax (string-to-char s)) ?\.)
+  (if (coq-is-symbol-or-punct (string-to-char s))
       (concat "\"" s "\"")
     s))
 
@@ -904,12 +918,6 @@ More precisely it executes SETCMD, then DO id and finally silently UNSETCMD."
 (defun coq-build-removed-patterns (l)
   (mapcar 'coq-build-removed-pattern l))
 
-(defsubst coq-put-into-double-quote-if-notation-remove-ind (s)
-  (let ((removed (coq-build-removed-patterns coq-removed-patterns-when-search)))
-    (if (equal (char-syntax (string-to-char s)) ?\.)
-        (apply 'concat (cons "\"" (cons s (cons "\"" removed))))
-      (apply 'concat (cons s removed)))))
-
 (defsubst coq-put-into-quotes (s)
   (concat "\"" s "\""))
 
@@ -923,7 +931,7 @@ This is specific to `coq-mode'."
 
 (defun coq-SearchConstant ()
   (interactive)
-  (coq-ask-do "Search constant" "Search" nil 'coq-put-into-double-quote-if-notation))
+  (coq-ask-do "Search constant" "Search"))
 
 (defun coq-SearchRewrite ()
   (interactive)
@@ -934,60 +942,60 @@ This is specific to `coq-mode'."
   (interactive)
   (coq-ask-do
    "SearchAbout (ex: \"eq_\" eq -bool)"
-   "SearchAbout" nil 'coq-put-into-double-quote-if-notation-remove-ind)
+   "SearchAbout")
   (message "use `coq-SearchAbout-all' to see constants ending with \"_ind\", \"_rec\", etc"))
 
 (defun coq-SearchAbout-all ()
   (interactive)
   (coq-ask-do
    "SearchAbout (ex: \"eq_\" eq -bool)"
-   "SearchAbout" nil 'coq-put-into-double-quote-if-notation))
+   "SearchAbout"))
 
 (defun coq-Print (withprintingall)
   "Ask for an ident and print the corresponding term.
 With flag Printing All if some prefix arg is given (C-u)."
   (interactive "P")
   (if withprintingall
-      (coq-ask-do-show-all "Print" "Print" nil 'coq-put-into-double-quote-if-notation)
-    (coq-ask-do "Print" "Print" nil 'coq-put-into-double-quote-if-notation)))
+      (coq-ask-do-show-all "Print" "Print")
+    (coq-ask-do "Print" "Print")))
 
 (defun coq-Print-with-implicits ()
   "Ask for an ident and print the corresponding term."
   (interactive)
-  (coq-ask-do-show-implicits "Print" "Print" nil 'coq-put-into-double-quote-if-notation))
+  (coq-ask-do-show-implicits "Print" "Print"))
 
 (defun coq-Print-with-all ()
   "Ask for an ident and print the corresponding term."
   (interactive)
-  (coq-ask-do-show-all "Print" "Print" nil 'coq-put-into-double-quote-if-notation))
+  (coq-ask-do-show-all "Print" "Print"))
 
 (defun coq-About (withprintingall)
   "Ask for an ident and print information on it."
   (interactive "P")
   (if withprintingall
-      (coq-ask-do-show-all "About" "About" nil 'coq-put-into-double-quote-if-notation)
-    (coq-ask-do "About" "About" nil 'coq-put-into-double-quote-if-notation)))
+      (coq-ask-do-show-all "About" "About")
+    (coq-ask-do "About" "About")))
 
 (defun coq-About-with-implicits ()
   "Ask for an ident and print information on it."
   (interactive)
-  (coq-ask-do-show-implicits "About" "About" nil 'coq-put-into-double-quote-if-notation))
+  (coq-ask-do-show-implicits "About" "About"))
 
 (defun coq-About-with-all ()
   "Ask for an ident and print information on it."
   (interactive)
-  (coq-ask-do-show-all "About" "About" nil 'coq-put-into-double-quote-if-notation))
+  (coq-ask-do-show-all "About" "About"))
 
 
 (defun coq-LocateConstant ()
   "Locate a constant."
   (interactive)
-  (coq-ask-do "Locate" "Locate" nil 'coq-put-into-double-quote-if-notation))
+  (coq-ask-do "Locate" "Locate"))
 
 (defun coq-LocateLibrary ()
   "Locate a library."
   (interactive)
-  (coq-ask-do "Locate Library" "Locate Library" nil 'coq-put-into-double-quote-if-notation))
+  (coq-ask-do "Locate Library" "Locate Library"))
 
 (defun coq-LocateNotation ()
   "Locate a notation.  Put it automatically into quotes.
@@ -995,7 +1003,7 @@ This is specific to `coq-mode'."
   (interactive)
   (coq-ask-do
    "Locate notation (ex: \'exists\' _ , _)" "Locate"
-   nil 'coq-put-into-double-quote-if-notation))
+   ))
 
 (defun coq-set-undo-limit (undos)
   (proof-shell-invisible-command (format "Set Undo %s . " undos)))
@@ -1016,25 +1024,25 @@ This is specific to `coq-mode'."
 (defun coq-Print-implicit ()
   "Ask for an ident and print the corresponding term."
   (interactive)
-  (coq-ask-do "Print Implicit" "Print Implicit" nil 'coq-put-into-double-quote-if-notation))
+  (coq-ask-do "Print Implicit" "Print Implicit"))
 
 (defun coq-Check (withprintingall)
   "Ask for a term and print its type.
 With flag Printing All if some prefix arg is given (C-u)."
   (interactive "P")
   (if withprintingall
-      (coq-ask-do-show-all "Check" "Check" nil 'coq-put-into-double-quote-if-notation)
-    (coq-ask-do "Check" "Check" nil 'coq-put-into-double-quote-if-notation)))
+      (coq-ask-do-show-all "Check" "Check")
+    (coq-ask-do "Check" "Check")))
 
 (defun coq-Check-show-implicits ()
   "Ask for a term and print its type."
   (interactive)
-  (coq-ask-do-show-implicits "Check" "Check" nil 'coq-put-into-double-quote-if-notation))
+  (coq-ask-do-show-implicits "Check" "Check"))
 
 (defun coq-Check-show-all ()
   "Ask for a term and print its type."
   (interactive)
-  (coq-ask-do-show-all "Check" "Check" nil 'coq-put-into-double-quote-if-notation))
+  (coq-ask-do-show-all "Check" "Check"))
 
 (defun coq-get-response-string-at (&optional pt)
   "Go forward from PT until reaching a 'response property, and return it.
@@ -1091,6 +1099,42 @@ flag Printing All set."
   (coq-ask-do-show-all "Show goal number" "Show" t))
 
 
+(defun coq-adapt-printing-width ()
+  "Sends a Set Printing Width command to coq to fit the response window's width.
+A Show command is also issued, so that the goal is redisplayed."
+  (interactive)
+  (let* ((goals-wins (get-buffer-window-list proof-goals-buffer))
+        (dummy (if (not (eq 1 (length goals-wins)))
+                   (error "Zero or more than one goals window")))
+        (goal-win (car goals-wins))
+        (wdth
+         (save-selected-window
+           (select-window goal-win)
+           (window-width))))
+    (proof-shell-invisible-command (format "Set Printing Width %S." (- wdth 1)) t)
+    (proof-shell-invisible-command (format "Show.") t)))
+
+(defvar coq-highlight-id-last-regexp nil)
+
+(defun coq-highlight-id-in-goals (re)
+  (with-current-buffer proof-goals-buffer
+    (highlight-regexp re 'lazy-highlight)))
+
+(defun coq-unhighlight-id-in-goals (re)
+  (with-current-buffer proof-goals-buffer
+    (unhighlight-regexp re)))
+
+(defun coq-highlight-id-at-pt-in-goals ()
+  (interactive)
+  (let* ((id (coq-id-or-notation-at-point))
+         (re (regexp-quote (or id ""))))
+    (when coq-highlight-id-last-regexp
+      (coq-unhighlight-id-in-goals coq-highlight-id-last-regexp)
+      (if (equal id coq-highlight-id-last-regexp)
+        (setq coq-highlight-id-last-regexp "")
+        (coq-highlight-id-in-goals re)
+      (setq coq-highlight-id-last-regexp re)))))
+
 (proof-definvisible coq-PrintHint "Print Hint. ")
 
 ;; Items on show menu
@@ -1111,6 +1155,8 @@ flag Printing All set."
 ; Takes an argument
 ;(proof-definvisible coq-set-printing-printing-depth "Set Printing Printing Depth . ")
 ;(proof-definvisible coq-unset-printing-printing-depth "Unset Printing Printing Depth . ")
+
+
 
 (defun coq-Compile ()
   "Compiles current buffer."
@@ -1220,8 +1266,14 @@ alreadyopen is t if buffer already existed."
 
 ;; match-string 1 must contain the string to add to coqtop command line, so we
 ;; ignore -arg, we use numbered subregexpr.
+
+;; FIXME: if several options are given (within "") in a single -arg line, then
+;; they are glued and passed as a single argument to coqtop. this is bad and
+;; not conforming to coq_makefile. HOWEVER: this is probably a bad feature of
+;; coq_makefile to allow several arguments in a single - arg "xxx yyy".
 (defconst coq-prog-args-regexp
-  "\\_<\\(?1:-opt\\|-byte\\)\\|-arg\\(?:[[:space:]]+\\(?1:[^ \t\n#]+\\)\\)?")
+  "\\_<\\(?1:-opt\\|-byte\\)\\|-arg[[:space:]]+\\(?:\\(?1:[^\"\t\n#]+\\)\\|\"\\(?1:[^\"]+\\)\"\\)")
+
 
 (defun coq-read-option-from-project-file (projectbuffer regexp &optional dirprefix)
   "look for occurrences of regexp in buffer projectbuffer and collect subexps.
@@ -1238,9 +1290,9 @@ allows to call coqtop from a subdirectory of the project."
         (goto-char (point-min))
         (while (re-search-forward regexp nil t)
           (let* ((firstfname (match-string 1))
-                (second (match-string 2))
-                (first (if (null dirprefix) firstfname
-                         (expand-file-name firstfname dirprefix))))
+                 (second (match-string 2))
+                 (first (if (null dirprefix) firstfname
+                          (expand-file-name firstfname dirprefix))))
             (if second ; if second arg is "" (two doublequotes), it means empty string
                 (let ((sec (if (string-equal second "\"\"") "" second)))
                   (if (string-match coq-load-path--R-regexp (match-string 0))
@@ -1333,11 +1385,17 @@ Warning:
 ;; need to make this hook local.
 ;; hack-local-variables-hook seems to hack local and dir local vars.
 (add-hook 'coq-mode-hook
-          '(lambda () (add-hook 'hack-local-variables-hook
-                                'coq-load-project-file
-                                nil t)))
+          '(lambda ()
+             (add-hook 'hack-local-variables-hook
+                       'coq-load-project-file
+                       nil t)))
 
-
+;; smie's parenthesis blinking is too slow, let us have the default one back
+(add-hook 'coq-mode-hook
+          '(lambda ()
+             (when (and (fboundp 'show-paren--default)
+                        (boundp 'show-paren-data-function))
+               (setq show-paren-data-function 'show-paren--default))))
 
 (defun coq-toggle-use-project-file ()
   (interactive)
@@ -1413,6 +1471,47 @@ Warning:
 ;        (current-column))))))
 ;
 
+(defun coq-get-comment-region (pt)
+  "Return a list of the forme (beg end) where beg,end is the comment region arount position PT.
+Return nil if PT is not inside a comment"
+  (save-excursion
+    (goto-char pt)
+    `(,(save-excursion (coq-find-comment-start))
+      ,(save-excursion (coq-find-comment-end)))))
+
+(defun coq-near-comment-region ()
+  "Return a list of the forme (beg end) where beg,end is the comment region near position PT.
+Return nil if PT is not near a comment.
+Near here means PT is either inside or just aside of a comment."
+  (save-excursion
+    (cond
+     ((coq-looking-at-comment)
+      (coq-get-comment-region (point)))
+     ((and (looking-back proof-script-comment-end)
+           (save-excursion (forward-char -1) (coq-looking-at-comment)))
+      (coq-get-comment-region (- (point) 1)))
+     ((and (looking-at proof-script-comment-start)
+           (save-excursion (forward-char) (coq-looking-at-comment)))
+      (coq-get-comment-region (+ (point) 1))))))
+
+(defun coq-fill-paragraph-function (n)
+  "Coq mode specific fill-paragraph function. Fills only comment at point."
+  (let ((reg (coq-near-comment-region)))
+    (when reg
+      (fill-region (car reg) (cadr reg))))
+  t);; true to not fallback to standard fill function
+
+;; TODO (but only for paragraphs in comments)
+;; Should recognize coqdoc bullets, stars etc... Unplugged for now.
+(defun coq-adaptive-fill-function ()
+  (let ((reg (coq-near-comment-region)))
+    (save-excursion
+      (goto-char (car reg))
+      (re-search-forward "\\((\\*+ ?\\)\\( *\\)")
+      (let* ((cm-start (match-string 1))
+             (cm-prefix (match-string 2)))
+        (concat (make-string (length cm-start) ? ) cm-prefix)))))
+
 (defun coq-mode-config ()
   ;; SMIE needs this.
   (set (make-local-variable 'parse-sexp-ignore-comments) t)
@@ -1420,6 +1519,18 @@ Warning:
   (set (make-local-variable 'indent-tabs-mode) nil)
   ;; Coq defninition never start by a parenthesis
   (set (make-local-variable 'open-paren-in-column-0-is-defun-start) nil)
+  ;; do not break lines in code when filling
+  (set (make-local-variable 'fill-nobreak-predicate)
+       (lambda ()
+         (not (eq (get-text-property (point) 'face) 'font-lock-comment-face))))
+  ;; coq mode specific indentation function
+  (set (make-local-variable 'fill-paragraph-function) 'coq-fill-paragraph-function)
+
+  ;; TODO (but only for paragraphs in comments)
+  ;; (set (make-local-variable 'paragraph-start)  "[ 	]*\\((\\**\\|$\\)")
+  ;; (set (make-local-variable 'paragraph-separate) "\\**) *$\\|$")
+  ;; (set (make-local-variable 'adaptive-fill-function) 'coq-adaptive-fill-function)
+
   ;; coq-mode colorize errors better than the generic mechanism
   (setq proof-script-color-error-messages nil)
   (setq proof-terminal-string ".")
@@ -1428,10 +1539,8 @@ Warning:
   (setq proof-script-comment-start "(*")
   (setq proof-script-comment-end "*)")
   (setq proof-script-insert-newlines nil)
-  (set (make-local-variable 'comment-start-skip)
-       (regexp-quote (if (string-equal "" proof-script-comment-start)
-                         "\n" ;; end-of-line terminated comments
-                       proof-script-comment-start)))
+  (set (make-local-variable 'comment-start-skip)  "(\\*+ *")
+  (set (make-local-variable 'comment-end-skip) " *\\*+)")
   (setq proof-unnamed-theorem-name "Unnamed_thm") ; Coq's default name
 
   (setq proof-assistant-home-page coq-www-home-page)
@@ -1577,7 +1686,7 @@ Warning:
    proof-no-fully-processed-buffer t
 
    ;; Coq has no global settings?
-   ;; (proof-assistant-settings-cmd))
+   ;; (proof-assistant-settings-cmd)
 
    proof-shell-restart-cmd coq-shell-restart-cmd
    pg-subterm-anns-use-stack t)
@@ -1799,11 +1908,15 @@ This is the Coq incarnation of `proof-tree-find-undo-position'."
 ;; Pre-processing of input string
 ;;
 
+
+(defconst coq--time-prefix "Time "
+  "Coq command prefix for displaying timing information.")
+
 ;; Remark: `action' and `string' are known by `proof-shell-insert-hook'
 (defun coq-preprocessing ()
   (if coq-time-commands
       (with-no-warnings  ;; NB: dynamic scoping of `string'
-        (setq string (concat "Time " string)))))
+        (setq string (concat coq--time-prefix string)))))
 
 (add-hook 'proof-shell-insert-hook 'coq-preprocessing)
 
@@ -2149,7 +2262,7 @@ Completion is on a quasi-exhaustive list of Coq tacticals."
 (define-key coq-keymap [?h] 'coq-PrintHint)
 (define-key coq-keymap [(control ?l)] 'coq-LocateConstant)
 (define-key coq-keymap [(control ?n)] 'coq-LocateNotation)
-
+(define-key coq-keymap [(control ?w)] 'coq-adapt-printing-width)
 ;(proof-eval-when-ready-for-assistant
 ; (define-key ??? [(control c) (control a)] (proof-ass keymap)))
 
@@ -2167,6 +2280,9 @@ Completion is on a quasi-exhaustive list of Coq tacticals."
 (define-key coq-goals-mode-map [(control ?c)(control ?a)?g] 'proof-store-goals-win)
 (define-key coq-goals-mode-map [(control ?c)(control ?a)?h] 'coq-PrintHint)
 (define-key coq-goals-mode-map [(control ?c)(control ?a)(control ?q)] 'coq-query)
+(define-key coq-goals-mode-map [(control ?c)(control ?a)(control ?w)] 'coq-adapt-printing-width)
+(define-key coq-goals-mode-map [(control ?c)(control ?a)(control ?l)] 'coq-LocateConstant)
+(define-key coq-goals-mode-map [(control ?c)(control ?a)(control ?n)] 'coq-LocateNotation)
 
 
 (define-key coq-response-mode-map [(control ?c)(control ?a)(control ?c)] 'coq-Check)
@@ -2179,6 +2295,9 @@ Completion is on a quasi-exhaustive list of Coq tacticals."
 (define-key coq-response-mode-map [(control ?c)(control ?a)(control ?g)] 'proof-store-goals-win)
 (define-key coq-response-mode-map [(control ?c)(control ?a)?h] 'coq-PrintHint)
 (define-key coq-response-mode-map [(control ?c)(control ?a)(control ?q)] 'coq-query)
+(define-key coq-response-mode-map [(control ?c)(control ?a)(control ?w)] 'coq-adapt-printing-width)
+(define-key coq-response-mode-map [(control ?c)(control ?a)(control ?l)] 'coq-LocateConstant)
+(define-key coq-response-mode-map [(control ?c)(control ?a)(control ?n)] 'coq-LocateNotation)
 
 (when coq-remap-mouse-1
   (define-key proof-mode-map [(control down-mouse-1)] 'coq-id-under-mouse-query)
@@ -2290,9 +2409,10 @@ buffer."
           (coq-find-real-start)
           
           ;; utf8 adaptation is made in coq-get-last-error-location above
-          (goto-char (+ (point) pos))
-          (span-make-self-removing-span (point) (+ (point) lgth)
-                                        'face 'proof-warning-face))))))
+          (let ((time-offset (if coq-time-commands (length coq--time-prefix) 0)))
+            (goto-char (+ (point) pos))
+            (span-make-self-removing-span (point) (+ (point) (- lgth time-offset))
+                                          'face 'proof-warning-face)))))))
 
 (defun coq-highlight-error-hook ()
   (coq-highlight-error t t))
