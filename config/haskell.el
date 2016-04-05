@@ -1,5 +1,5 @@
 (require 'haskell-mode-autoloads)
-(require 'haskell-indent)
+(require 'haskell-indentation)
 
 ;; functions
 
@@ -72,4 +72,4 @@
 
 ;; hook
 
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
