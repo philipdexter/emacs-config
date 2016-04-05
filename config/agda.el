@@ -1,6 +1,7 @@
 (defun agda-find-hook()
   (let ((fn (buffer-file-name)))
     (when (string-match "\\.agda$" fn)
+      (setq agda2-program-args '("--include-path=/home/philip/projects/agda/std-lib/src" "--include-path=."))
       (load-file (let ((coding-system-for-read 'utf-8))
                       (shell-command-to-string "agda-mode locate")))
       (agda2-mode))))
