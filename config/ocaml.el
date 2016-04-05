@@ -1,4 +1,4 @@
-(push "/usr/local/share/emacs/site-lisp" load-path)
+(push "~/.opam/4.02.3/share/emacs/site-lisp" load-path)
 
 (defun ocaml-find-hook()
   (let ((fn (buffer-file-name)))

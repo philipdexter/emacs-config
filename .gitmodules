@@ -46,9 +46,6 @@
 [submodule "packages/auctex"]
 	path = packages/auctex
 	url = git@github.com:giordano/auctex
-[submodule "packages/merlin"]
-	path = packages/merlin
-	url = git@github.com:the-lambda-church/merlin
 [submodule "packages/magit"]
 	path = packages/magit
 	url = git@github.com:magit/magit
