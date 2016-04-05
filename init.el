@@ -11,7 +11,6 @@
     color-theme-solarized
     idris-mode
     markdown-mode
-    nix-mode
     rust-mode
     tuareg
     dash
