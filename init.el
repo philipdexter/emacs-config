@@ -15,8 +15,7 @@
     dash
     s
     f
-    let-alist
-    elm-mode))
+    let-alist))
 
 ;; local config files
 (defvar configs
