@@ -126,8 +126,8 @@ without adjusting window layout."
   (define-key map [(control c) ?v] 'pg-toggle-visibility)
   (define-key map [(control meta mouse-3)] 'proof-mouse-goto-point)
   ;; NB: next binding overwrites comint-find-source-code.
-  (define-key map [(meta p)] 'pg-previous-matching-input-from-input)
-  (define-key map [(meta n)] 'pg-next-matching-input-from-input)
+  ;; (define-key map [(meta p)] 'pg-previous-matching-input-from-input)
+  ;; (define-key map [(meta n)] 'pg-next-matching-input-from-input)
   ;; Standard binding for completion
   (define-key map [(control return)] 'proof-script-complete)
   (define-key map [(control c) (control ?\;)] 'pg-insert-last-output-as-comment)
