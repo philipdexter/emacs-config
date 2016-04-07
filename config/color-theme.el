@@ -6,3 +6,5 @@
 ;; (set-frame-parameter nil 'background-mode 'light)
 ;; (set-terminal-parameter nil 'background-mode 'light)
 (color-theme-solarized)
+
+(set-face-attribute 'tuareg-font-lock-operator-face nil :foreground "#5f5faf")
