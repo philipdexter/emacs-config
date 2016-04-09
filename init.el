@@ -27,6 +27,7 @@
     "java"
     "idris"
     "coq"
+    "twelf"
     "agda"
     "c"
     "ocaml"
