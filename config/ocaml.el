@@ -12,5 +12,6 @@
 	(autoload 'merlin-mode "merlin" "Merlin mode" t)
 	(add-hook 'tuareg-mode-hook 'merlin-mode)
 	(add-hook 'caml-mode-hook 'merlin-mode)
-	(tuareg-mode)))))
+	(tuareg-mode)
+	(company-mode)))))
 (add-hook 'find-file-hooks 'ocaml-find-hook)
