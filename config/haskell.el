@@ -49,6 +49,7 @@
 
 ;; keybindings
 
+(define-key haskell-mode-map (kbd "C-c c") 'haskell-compile)
 (define-key haskell-mode-map (kbd "C-c C-d") 'haskell-insert-doc)
 (define-key haskell-mode-map (kbd "C-c C-u") 'haskell-insert-undefined)
 (define-key haskell-mode-map (kbd "C-c [") 'haskell-move-nested-left)
@@ -60,15 +61,21 @@
 (global-set-key (kbd "C-c |") 'haskell-indent-insert-guard)
 (global-set-key (kbd "C-c C-f") 'haskell-mode-format-imports)
 
-(define-key haskell-mode-map (kbd "C-c `") 'haskell-interactive-bring)
-(define-key haskell-mode-map (kbd "C-x C-d") nil)
-(define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
-(define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-file)
-(define-key haskell-mode-map (kbd "C-c C-b") 'haskell-interactive-switch)
+(define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
+(setq haskell-process-type 'stack-ghci)
+(setq haskell-compile-cabal-build-command "stack build")
+;; (setq haskell-process-path-ghci "stack")
+;; (setq haskell-process-args-ghci "ghci")
+
+;; (define-key haskell-mode-map (kbd "C-c `") 'haskell-interactive-bring)
+;; (define-key haskell-mode-map (kbd "C-x C-d") nil)
+;; (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+;; (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-file)
+;; (define-key haskell-mode-map (kbd "C-c C-b") 'haskell-interactive-switch)
 (define-key haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
-(define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
-(define-key haskell-mode-map (kbd "C-c C-a") 'haskell-indent-align-guards-and-rhs)
-(define-key haskell-mode-map (kbd "C-c M-.") nil)
+;; (define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
+;; (define-key haskell-mode-map (kbd "C-c C-a") 'haskell-indent-align-guards-and-rhs)
+;; (define-key haskell-mode-map (kbd "C-c M-.") nil)
 
 ;; hook
 
