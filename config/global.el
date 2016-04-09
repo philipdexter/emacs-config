@@ -157,9 +157,6 @@
 
    '(:eval (propertize "%b " 'face 'font-lock-keyword-face))
 
-   '(:eval (when god-local-mode
-	     (propertize "G " 'face 'font-lock-warning-face)))
-
    (propertize "%02l" 'face 'font-lock-type-face) (propertize "," 'face 'font-lock-type-face)
    (propertize "%02c" 'face 'font-lock-type-face)
 
