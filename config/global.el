@@ -1,3 +1,9 @@
+;; save history
+(savehist-mode 1)
+(setq savehist-file "~/.emacs.d/savehist")
+(if (file-exists-p "~/.emacs.d/savehist")
+    (load-file "~/.emacs.d/savehist"))
+
 ;; ido mode
 (ido-mode t)
 (setq ido-enable-flex-matching t)
