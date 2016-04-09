@@ -30,6 +30,9 @@
       (put #'company-coq-fold 'disabled nil)
       (setq company-coq-features/prettify-symbols-in-terminals t)
       (proof-electric-terminator-enable 1)
+      (define-key coq-mode-map (kbd "C-c ,") 'company-coq-occur)
+      (define-key coq-mode-map (kbd "C-c C-s") nil)
+      (define-key coq-mode-map (kbd "C-c C-_") 'company-coq-fold)
       (define-key coq-mode-map (kbd "M-p") 'proof-undo-last-successful-command)
       (define-key coq-mode-map (kbd "M-n") 'proof-goto-next)
       (define-key proof-mode-map (kbd "M-p") 'proof-undo-last-successful-command)
@@ -44,5 +47,3 @@
 
 (custom-set-faces
  '(proof-locked-face ((t (:background "color-123" :underline nil)))))
-
-; (add-to-list 'auto-mode-alist '("\\.v$" . coq-mode))
