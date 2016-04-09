@@ -179,3 +179,20 @@
    ;;'minor-mode-alist
 
    (propertize "%-" 'face 'font-lock-type-face)))
+
+
+
+;; C-,
+(define-key input-decode-map "\e[49~" [(f35)])
+(define-key key-translation-map (kbd "C-<f3>") (kbd "C-,"))
+(define-key key-translation-map (kbd "<f35>") (kbd "C-,"))
+
+;; C-RET
+(define-key input-decode-map "\e[50~" [(f36)])
+(define-key key-translation-map (kbd "C-<f4>") (kbd "C-RET"))
+(define-key key-translation-map (kbd "<f36>") (kbd "C-RET"))
+
+;; M-S-RET
+(define-key input-decode-map "\e[51~" [(f37)])
+(define-key key-translation-map (kbd "C-<f5>") (kbd "M-S-RET"))
+(define-key key-translation-map (kbd "<f37>") (kbd "M-S-RET"))
