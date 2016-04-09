@@ -30,7 +30,6 @@
       (put #'company-coq-fold 'disabled nil)
       (setq company-coq-features/prettify-symbols-in-terminals t)
       (proof-electric-terminator-enable 1)
-      (define-key coq-mode-map (kbd "C-c ,") 'company-coq-occur)
       (define-key coq-mode-map (kbd "C-c C-s") nil)
       (define-key coq-mode-map (kbd "C-c C-_") 'company-coq-fold)
       (define-key coq-mode-map (kbd "M-p") 'proof-undo-last-successful-command)
