@@ -38,6 +38,11 @@
 
 ;; whitespace
 (setq-default show-trailing-whitespace t)
+(define-key global-map (kbd "M-F") 'forward-whitespace)
+(defun backward-whitespace (arg)
+  (interactive "^p")
+  (forward-whitespace (- 0 arg)))
+(define-key global-map (kbd "M-B") 'backward-whitespace)
 
 ;; return n lines as a string
 (defun n-lines (lines)
