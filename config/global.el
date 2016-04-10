@@ -172,11 +172,9 @@
    '(:eval (propertize "%m" 'face 'font-lock-string-face))
    (propertize "> " 'face 'font-lock-type-face)
 
-   '(:eval (propertize (format-time-string "%H:%M") 'face 'font-lock-doc-face))
+   (propertize "--" 'face 'font-lock-type-face)
 
-   (propertize " --" 'face 'font-lock-type-face)
-
-   ;;'minor-mode-alist
+   `(:propertize ("" minor-mode-alist) face font-lock-type-face)
 
    (propertize "%-" 'face 'font-lock-type-face)))
 
