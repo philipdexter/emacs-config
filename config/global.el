@@ -196,3 +196,8 @@
 (define-key input-decode-map "\e[51~" [(f37)])
 (define-key key-translation-map (kbd "C-<f5>") (kbd "M-S-RET"))
 (define-key key-translation-map (kbd "<f37>") (kbd "M-S-RET"))
+
+;; C-M-%
+(define-key input-decode-map "\e[52~" [(f38)])
+(define-key key-translation-map (kbd "C-<f6>") (kbd "C-M-%"))
+(define-key key-translation-map (kbd "<f38>") (kbd "C-M-%"))
