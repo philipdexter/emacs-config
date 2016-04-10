@@ -1,5 +1,5 @@
 (require 'haskell-mode-autoloads)
-(require 'haskell-indentation)
+;(require 'haskell-indentation)
 
 ;; functions
 
