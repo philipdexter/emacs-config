@@ -57,9 +57,9 @@
 (define-key haskell-mode-map (kbd "M-,") 'haskell-who-calls)
 (define-key haskell-mode-map (kbd "C-c C-m") 'haskell-auto-insert-module-template)
 
-(global-set-key (kbd "C-c C-e") 'haskell-indent-insert-equal)
-(global-set-key (kbd "C-c |") 'haskell-indent-insert-guard)
-(global-set-key (kbd "C-c C-f") 'haskell-mode-format-imports)
+(define-key haskell-mode-map (kbd "C-c C-e") 'haskell-indent-insert-equal)
+(define-key haskell-mode-map (kbd "C-c |") 'haskell-indent-insert-guard)
+(define-key haskell-mode-map (kbd "C-c C-f") 'haskell-mode-format-imports)
 
 (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
 (setq haskell-process-type 'stack-ghci)
