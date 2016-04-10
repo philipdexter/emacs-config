@@ -19,7 +19,6 @@
 (defvar configs
   '("global"
     "haskell"
-    "cycle-buffer"
     "latex"
     "smex"
     "color-theme"
