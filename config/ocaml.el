@@ -15,3 +15,5 @@
 	(tuareg-mode)
 	(company-mode)))))
 (add-hook 'find-file-hooks 'ocaml-find-hook)
+
+(set-face-attribute 'tuareg-font-lock-operator-face nil :foreground "#5f5faf")
