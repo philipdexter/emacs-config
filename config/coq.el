@@ -29,7 +29,9 @@
       (company-coq-mode)
       (put #'company-coq-fold 'disabled nil)
       (setq company-coq-features/prettify-symbols-in-terminals t)
+      (set-face-attribute 'proof-locked-face nil :background "#1c1c1c" :underline nil)
       (proof-electric-terminator-enable 1)
+      (setq coq-prog-args '("-emacs-U" "-R" "/home/philip/coq/cpdt/src" "Cpdt"))
       (define-key coq-mode-map (kbd "C-c C-s") nil)
       (define-key coq-mode-map (kbd "C-c C-_") 'company-coq-fold)
       (define-key coq-mode-map (kbd "M-p") 'proof-undo-last-successful-command)
@@ -40,9 +42,3 @@
       (define-key coq-mode-map (kbd "C-c C-a d") 'company-coq-toggle-definition-overlay)
       (define-key coq-mode-map (kbd "M-RET") 'proof-goto-point))))
 (add-hook 'find-file-hooks 'coq-find-hook)
-
-(custom-set-variables
-  '(coq-prog-args '("-R" "/home/philip/coq/cpdt/src" "Cpdt")))
-
-(custom-set-faces
- '(proof-locked-face ((t (:background "color-123" :underline nil)))))
