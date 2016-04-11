@@ -30,6 +30,9 @@
 ;; remove region highlighting
 (transient-mark-mode -1)
 
+;; disable cursor blinking
+(setq visible-cursor nil)
+
 ;; backup to home directory
 (setq
  backup-by-copying t
