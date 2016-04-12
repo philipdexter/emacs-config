@@ -61,7 +61,7 @@
 (define-key haskell-mode-map (kbd "C-c |") 'haskell-indent-insert-guard)
 (define-key haskell-mode-map (kbd "C-c C-f") 'haskell-mode-format-imports)
 
-(define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
+(define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-file)
 (setq haskell-process-type 'stack-ghci)
 (setq haskell-compile-cabal-build-command "stack build")
 ;; (setq haskell-process-path-ghci "stack")
