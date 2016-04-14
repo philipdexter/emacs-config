@@ -7,6 +7,7 @@
     smex
     color-theme
     color-theme-solarized
+    prop-menu
     idris-mode
     markdown-mode
     tuareg
