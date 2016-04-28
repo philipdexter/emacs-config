@@ -47,11 +47,6 @@
   (forward-whitespace (- 0 arg)))
 (define-key global-map (kbd "M-B") 'backward-whitespace)
 
-(defun zap-to-char-backwards (char)
-  (interactive "cZap to char: ")
-  (zap-to-char -1 char))
-(global-set-key (kbd "C-M-z") 'zap-to-char-backwards)
-
 ;; move lines up/down
 (defun move-line-up ()
   (interactive)
