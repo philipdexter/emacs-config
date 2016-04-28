@@ -136,11 +136,6 @@
 (define-key global-map (kbd "C-x r t") 'string-insert-rectangle)
 
 ;; change mode line
-(defun plist (list)
-  (while list
-    (print (car list))
-    (setq list (cdr list))))
-
 (setq-default mode-line-format
   (list
    "%e"
