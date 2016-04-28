@@ -47,13 +47,6 @@
   (forward-whitespace (- 0 arg)))
 (define-key global-map (kbd "M-B") 'backward-whitespace)
 
-;; return n lines as a string
-(defun n-lines (lines)
-  (save-excursion
-    (buffer-substring (progn (beginning-of-line 1) (point))
-                      (progn (next-line (- lines 1)) (end-of-line 1) (point)))))
-
-
 (defun zap-to-char-backwards (char)
   (interactive "cZap to char: ")
   (zap-to-char -1 char))
