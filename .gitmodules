@@ -58,3 +58,6 @@
 [submodule "packages/prop-menu"]
 	path = packages/prop-menu
 	url = git://github.com/david-christiansen/prop-menu-el.git
+[submodule "packages/w3m"]
+	path = packages/w3m
+	url = git://github.com/emacsorphanage/w3m.git
