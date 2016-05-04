@@ -15,7 +15,8 @@
     s
     f
     let-alist
-    writegood-mode))
+    writegood-mode
+    expand-region))
 
 ;; local config files
 (defvar configs
@@ -33,7 +34,8 @@
     "c"
     "ocaml"
     "magit"
-    "writegood"))
+    "writegood"
+    "expand"))
 
 (loop for name in packages
       do (progn (unless (fboundp name)

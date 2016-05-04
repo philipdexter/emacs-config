@@ -64,3 +64,6 @@
 [submodule "packages/writegood-mode"]
 	path = packages/writegood-mode
 	url = git://github.com/bnbeckwith/writegood-mode.git
+[submodule "packages/expand-region"]
+	path = packages/expand-region
+	url = git://github.com/magnars/expand-region.git
