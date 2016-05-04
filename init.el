@@ -14,7 +14,8 @@
     dash
     s
     f
-    let-alist))
+    let-alist
+    writegood-mode))
 
 ;; local config files
 (defvar configs
@@ -31,7 +32,8 @@
     "agda"
     "c"
     "ocaml"
-    "magit"))
+    "magit"
+    "writegood"))
 
 (loop for name in packages
       do (progn (unless (fboundp name)
