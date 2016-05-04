@@ -67,3 +67,6 @@
 [submodule "packages/expand-region"]
 	path = packages/expand-region
 	url = git://github.com/magnars/expand-region.git
+[submodule "packages/multiple-cursors"]
+	path = packages/multiple-cursors
+	url = git://github.com/magnars/multiple-cursors.el.git
