@@ -29,7 +29,7 @@
     (define-key coq-mode-map (kbd "M-p") 'proof-undo-last-successful-command)
     (define-key coq-mode-map (kbd "M-n") 'my/proof-goto-next)
     (define-key proof-mode-map (kbd "M-p") 'proof-undo-last-successful-command)
-    (define-key proof-mode-map (kbd "M-n") 'proof-goto-next)
+    (define-key proof-mode-map (kbd "M-n") 'my/proof-goto-next)
     (define-key coq-mode-map (kbd "C-c C-a d") 'company-coq-toggle-definition-overlay)
     (define-key coq-mode-map (kbd "M-RET") 'proof-goto-point)
     (setq my/coq-loaded t)))
