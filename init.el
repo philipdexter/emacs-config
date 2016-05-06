@@ -15,6 +15,7 @@
     s
     f
     let-alist
+    undo-tree
     writegood-mode
     expand-region))
 
@@ -34,6 +35,7 @@
     "c"
     "ocaml"
     "magit"
+    "undo-tree"
     "writegood"
     "expand"))
 
