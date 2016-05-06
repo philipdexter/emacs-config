@@ -14,6 +14,11 @@
 ;; remove menu bar
 (menu-bar-mode -1)
 
+;; remove scroll bar and tool bar
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(set-face-attribute 'default nil :height 65)
+
 ;; turn off electric-indent-mode
 (set-default 'electric-indent-mode nil)
 
@@ -32,6 +37,8 @@
 
 ;; disable cursor blinking
 (setq visible-cursor nil)
+(blink-cursor-mode 0)
+
 
 ;; backup to home directory
 (setq
