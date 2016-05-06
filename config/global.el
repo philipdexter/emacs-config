@@ -39,6 +39,8 @@
 (setq visible-cursor nil)
 (blink-cursor-mode 0)
 
+;; no double spaces on paragraph-fill
+(setq sentence-end-double-space nil)
 
 ;; backup to home directory
 (setq
