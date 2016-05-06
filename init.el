@@ -36,6 +36,7 @@
     "c"
     "ocaml"
     "magit"
+    "mail"
     "org"
     "undo-tree"
     "writegood"
