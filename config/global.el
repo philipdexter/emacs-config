@@ -215,6 +215,9 @@
 		 (propertize "%-" 'face '(:background "dim gray" :foreground "color-16")))))
 
 
+;; Swap recursive edit stuff
+(define-key global-map (kbd "C-]") 'exit-recursive-edit)
+(define-key global-map (kbd "C-M-c") 'abort-recursive-edit)
 
 ;; C-,
 (define-key input-decode-map "\e[49~" [(f35)])
