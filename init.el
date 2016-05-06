@@ -17,7 +17,8 @@
     let-alist
     undo-tree
     writegood-mode
-    expand-region))
+    expand-region
+    multiple-cursors))
 
 ;; local config files
 (defvar configs
@@ -37,7 +38,8 @@
     "magit"
     "undo-tree"
     "writegood"
-    "expand"))
+    "expand"
+    "multiple-cursors"))
 
 (loop for name in packages
       do (progn (unless (fboundp name)
