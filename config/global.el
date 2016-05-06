@@ -180,36 +180,39 @@
 		 "%e"
 
 		 '(:eval (when (buffer-modified-p)
-			   (propertize "*" 'face 'font-lock-type-face)))
+			   (propertize "*" 'face '(:background "lawn green" :foreground "color-16"))))
 
 		 '(:eval (when buffer-read-only
 			   "%%"))
 
-		 '(:eval (propertize "%b " 'face 'font-lock-keyword-face))
+		 '(:eval (propertize "%b" 'face '(:background "orange red" :foreground "color-16")))
 
-		 (propertize "%02l" 'face 'font-lock-type-face) (propertize "," 'face 'font-lock-type-face)
-		 (propertize "%02c" 'face 'font-lock-type-face)
+		 (propertize " %02l" 'face '(:background "dim gray" :foreground "color-16"))
+		 (propertize "," 'face '(:background "dim gray" :foreground "color-16"))
+		 (propertize "%02c" 'face '(:background "dim gray" :foreground "color-16"))
 
-		 (propertize " " 'face 'font-lock-type-face)
-		 (propertize "%p" 'face 'font-lock-type-face)
+		 (propertize " " 'face '(:background "dim gray" :foreground "color-16"))
+		 (propertize "%p " 'face '(:background "dim gray" :foreground "color-16"))
 
-		 (propertize " <" 'face '(:background "color-16" :foreground "#af8700"))
-		 '(:eval (propertize "%m" 'face '(:background "color-16" :foreground "brightmagenta")))
-		 (propertize "> " 'face '(:background "color-16" :foreground "#af8700"))
+		 ;;(propertize "<" 'face '(:background "dark magenta" :foreground "salmon"))
+		 '(:eval (propertize "%m" 'face '(:foreground "#fff" :background "#003580")))
+		 ;;(propertize "> " 'face '(:background "dark magenta" :foreground "salmon"))
 
-		 (propertize "--" 'face 'font-lock-type-face)
+		 (propertize " // " 'face '(:background "dim gray" :foreground "color-16"))
 
-		 `(:propertize ("" minor-mode-alist) face font-lock-type-face)
+		 `(:propertize ("" minor-mode-alist) face (:foreground "#005b99" :background "#fcd116"))
 
+		 (propertize "    " 'face '(:foreground "color-16"))
 		 '(:eval global-mode-string)
-		 (propertize "/" 'face '(:foreground "color-16" :background "magenta"))
+		 (propertize "/" 'face '(:foreground "color-16" :background "dim gray"))
 		 '(:eval mode-line-process)
+		 (propertize "    " 'face '(:foreground "color-16"))
 
-		 (propertize "<" 'face '(:foreground "color-21" :background "white"))
-		 (propertize "<" 'face '(:foreground "color-20" :background "color-190"))
+		 (propertize "+" 'face '(:foreground "white" :background "#003580"))
+		 (propertize "+" 'face '(:foreground "#005b99" :background "#fcd116"))
 
 
-		 (propertize "%-" 'face 'font-lock-type-face))))
+		 (propertize "%-" 'face '(:background "dim gray" :foreground "color-16")))))
 
 
 
