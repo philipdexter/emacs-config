@@ -136,33 +136,80 @@
 (define-key global-map (kbd "C-x r t") 'string-insert-rectangle)
 
 ;; change mode line
-(setq-default mode-line-format
-  (list
-   "%e"
+(if window-system
+    (setq-default mode-line-format
+		  (list
+		   "%e"
 
-   '(:eval (when (buffer-modified-p)
-	     (propertize "*" 'face 'font-lock-type-face)))
+		   '(:eval (when (buffer-modified-p)
+			     (propertize "*" 'face '(:background "lawn green" :foreground "black"))))
 
-   '(:eval (when buffer-read-only
-	     "%%"))
+		   '(:eval (when buffer-read-only
+			     "%%"))
 
-   '(:eval (propertize "%b " 'face 'font-lock-keyword-face))
+		   '(:eval (propertize "%b" 'face '(:background "orange red" :foreground "black")))
 
-   (propertize "%02l" 'face 'font-lock-type-face) (propertize "," 'face 'font-lock-type-face)
-   (propertize "%02c" 'face 'font-lock-type-face)
+		   (propertize " %02l" 'face '(:background "dim gray" :foreground "black"))
+		   (propertize "," 'face '(:background "dim gray" :foreground "black"))
+		   (propertize "%02c" 'face '(:background "dim gray" :foreground "black"))
 
-   (propertize " " 'face 'font-lock-type-face)
-   (propertize "%p" 'face 'font-lock-type-face)
+		   (propertize " " 'face '(:background "dim gray" :foreground "black"))
+		   (propertize "%p " 'face '(:background "dim gray" :foreground "black"))
 
-   (propertize " <" 'face 'font-lock-type-face)
-   '(:eval (propertize "%m" 'face 'font-lock-string-face))
-   (propertize "> " 'face 'font-lock-type-face)
+		   ;;(propertize "<" 'face '(:background "dark magenta" :foreground "salmon"))
+		   '(:eval (propertize "%m" 'face '(:foreground "white" :background "#003580")))
+		   ;;(propertize "> " 'face '(:background "dark magenta" :foreground "salmon"))
 
-   (propertize "--" 'face 'font-lock-type-face)
+		   (propertize " // " 'face '(:background "dim gray" :foreground "black"))
 
-   `(:propertize ("" minor-mode-alist) face font-lock-type-face)
+		   `(:propertize ("" minor-mode-alist) face (:foreground "#005b99" :background "#fcd116"))
 
-   (propertize "%-" 'face 'font-lock-type-face)))
+		   (propertize "    " 'face '(:foreground "black"))
+		   '(:eval global-mode-string)
+		   (propertize "/" 'face '(:foreground "black" :background "dim gray"))
+		   '(:eval mode-line-process)
+		   (propertize "    " 'face '(:foreground "black"))
+
+		   (propertize "+" 'face '(:foreground "white" :background "#003580"))
+		   (propertize "+" 'face '(:foreground "#005b99" :background "#fcd116"))
+
+
+		   (propertize "%-" 'face '(:background "dim gray" :foreground "black"))))
+  (setq-default mode-line-format
+		(list
+		 "%e"
+
+		 '(:eval (when (buffer-modified-p)
+			   (propertize "*" 'face 'font-lock-type-face)))
+
+		 '(:eval (when buffer-read-only
+			   "%%"))
+
+		 '(:eval (propertize "%b " 'face 'font-lock-keyword-face))
+
+		 (propertize "%02l" 'face 'font-lock-type-face) (propertize "," 'face 'font-lock-type-face)
+		 (propertize "%02c" 'face 'font-lock-type-face)
+
+		 (propertize " " 'face 'font-lock-type-face)
+		 (propertize "%p" 'face 'font-lock-type-face)
+
+		 (propertize " <" 'face '(:background "color-16" :foreground "#af8700"))
+		 '(:eval (propertize "%m" 'face '(:background "color-16" :foreground "brightmagenta")))
+		 (propertize "> " 'face '(:background "color-16" :foreground "#af8700"))
+
+		 (propertize "--" 'face 'font-lock-type-face)
+
+		 `(:propertize ("" minor-mode-alist) face font-lock-type-face)
+
+		 '(:eval global-mode-string)
+		 (propertize "/" 'face '(:foreground "color-16" :background "magenta"))
+		 '(:eval mode-line-process)
+
+		 (propertize "<" 'face '(:foreground "color-21" :background "white"))
+		 (propertize "<" 'face '(:foreground "color-20" :background "color-190"))
+
+
+		 (propertize "%-" 'face 'font-lock-type-face))))
 
 
 
