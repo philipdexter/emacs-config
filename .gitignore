@@ -2,3 +2,10 @@ auto-save-list/
 autosaves/
 bak/
 *.elc
+bbdb
+bookmarks
+.mc-lists.el
+ido.last
+image-dired/
+savehist
+smex-items
