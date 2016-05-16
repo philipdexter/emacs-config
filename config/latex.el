@@ -16,4 +16,6 @@
 	    (add-to-list 'load-path "~/.emacs.d/packages/auctex")
 	    (load "auctex.el" nil t t)
 	    (load "preview-latex.el" nil t t)
-	    (LaTeX-mode)))
+	    (LaTeX-mode)
+	    (setq auctex-latexmk-inherit-TeX-PDF-mode t)
+	    (setq-default TeX-master "paper-sigplan")))
