@@ -30,3 +30,9 @@
 	     word-wrap nil)))
 
 (setq gnus-treat-display-smileys nil)
+
+(defun my/mail-demon ()
+  (interactive)
+  (gnus-demon-init)
+  (setq gnus-demon-timestep 60)
+  (gnus-demon-add-handler 'gnus-demon-scan-news 2 1))
