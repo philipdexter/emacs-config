@@ -1,4 +1,7 @@
-(push "~/.opam/4.02.3/share/emacs/site-lisp" load-path)
+(setq opam-share
+      (substring
+       (shell-command-to-string "opam config var share 2> /dev/null") 0 -1))
+(push (concat opam-share "/emacs/site-lisp") load-path)
 
 (defun ocaml-find-hook()
   (let ((fn (buffer-file-name)))
@@ -7,6 +10,7 @@
 	   (string-match "\\.mli$" fn))
       (progn
 	(setq-default indent-tabs-mode nil)
+	(setq merlin-command 'opam)
 	(add-to-list 'load-path "~/.emacs.d/packages/company")
 	(require 'company)
 	(autoload 'merlin-mode "merlin" "Merlin mode" t)
