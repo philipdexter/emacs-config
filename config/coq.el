@@ -7,7 +7,7 @@
 			math-symbol-lists
 			company-math
 			company-coq)))
-    (load-file "/home/philip/.emacs.d/packages/ProofGeneral/generic/proof-site.el")
+    (load-file "/home/philip/.emacs.d/packages/PG/generic/proof-site.el")
     (loop for name in coq-packages
 	  do (unless (fboundp name)
 	       (add-to-list 'load-path
