@@ -164,6 +164,21 @@
 (define-key global-map (kbd "C-c C-8") 'ace-jump-mode)
 (define-key global-map (kbd "C-x r t") 'string-insert-rectangle)
 
+;; ag
+
+(defvar ag-history nil
+  "History for the `ag' command.")
+
+(defun ag (command-args)
+  (interactive
+   (let ((ag-command "ag --nogroup --filename "))
+     (list (read-shell-command "Run ag (like this): "
+                               ag-command
+                               'ag-history))))
+  (let ((compilation-disable-input t))
+    (compilation-start (concat command-args " < " null-device)
+                       'grep-mode)))
+
 ;; change mode line
 (if window-system
     (setq-default mode-line-format
