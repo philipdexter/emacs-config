@@ -80,6 +80,11 @@
 (global-set-key (kbd "M-P") 'move-line-up)
 (global-set-key (kbd "M-N") 'move-line-down)
 
+;; curl-url-at-point
+(defun my/curl-url-at-pont ()
+  (interactive)
+  (let ((the-url (thing-at-point-url-at-point)))
+    (async-shell-command (format "curl '%s' | zathura -" the-url))))
 
 ;; relative line numbers
 (defvar my-linum-format-string "%3d")
