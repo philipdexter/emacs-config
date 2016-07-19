@@ -1,4 +1,4 @@
-(require 'cl)
+(require 'cl-lib)
 
 ;; locally installed packages
 (defvar packages
@@ -39,7 +39,7 @@
     "expand"
     "multiple-cursors"))
 
-(loop for name in packages
+(cl-loop for name in packages
       do (progn (unless (fboundp name)
                   (add-to-list 'load-path
                                (concat (file-name-directory (or load-file-name
