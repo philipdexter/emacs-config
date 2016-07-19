@@ -2,15 +2,11 @@
 
 ;; locally installed packages
 (defvar packages
-  '(haskell-mode
-    ace-jump-mode
+  '(ace-jump-mode
     smex
     color-theme
     color-theme-solarized
-    prop-menu
-    idris-mode
     markdown-mode
-    tuareg
     dash
     s
     f
