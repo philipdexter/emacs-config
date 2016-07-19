@@ -36,3 +36,8 @@
   (gnus-demon-init)
   (setq gnus-demon-timestep 60)
   (gnus-demon-add-handler 'gnus-demon-scan-news 2 1))
+
+(defun my/all-mail ()
+  (interactive)
+  (gnus)
+  (my/mail-demon))
