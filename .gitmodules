@@ -76,3 +76,6 @@
 [submodule "packages/PG"]
 	path = packages/PG
 	url = http://github.com/ProofGeneral/PG
+[submodule "packages/eww-lnum"]
+	path = packages/eww-lnum
+	url = http://github.com/m00natic/eww-lnum
