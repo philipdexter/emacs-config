@@ -48,6 +48,15 @@
  backup-directory-alist '(("." . "~/.emacs.d/bak/"))
  auto-save-file-name-transforms `((".*" ,"~/.emacs.d/autosaves/" t)))
 
+(defun eval-replace-last-sexp ()
+  (interactive)
+  (backward-kill-sexp)
+  (condition-case nil
+      (prin1 (eval (read (current-kill 0))) (current-buffer))
+    (error (message "couldn't eval sexp")
+	   (insert (current-kill 0)))))
+(global-set-key (kbd "C-x E") 'eval-replace-last-sexp)
+
 ;; whitespace
 (setq-default show-trailing-whitespace t)
 (define-key global-map (kbd "M-F") 'forward-whitespace)
