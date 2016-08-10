@@ -37,7 +37,8 @@
     "undo-tree"
     "writegood"
     "expand"
-    "multiple-cursors"))
+    "multiple-cursors"
+    "eww"))
 
 (cl-loop for name in packages
       do (progn (unless (fboundp name)
