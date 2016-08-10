@@ -9,7 +9,6 @@
                  (end (region-end)))
              (replace-regexp "\\([.,?:;!]\\)\s+" "\\1
 " nil begin end)))))
-(define-key tex-mode-map (kbd "C-c q") 'fill-using-punctuation)
 
 (add-hook 'tex-mode-hook
           (lambda ()
@@ -21,6 +20,15 @@
 	    (require 'latex-mode-expansions)
 	    (require 'auctex-latexmk)
 	    (auctex-latexmk-setup)
+	    (set-face-attribute 'font-latex-math-face nil :foreground "blue")
+	    (set-face-attribute 'font-latex-warning-face nil :foreground "white")
+	    (define-key TeX-mode-map (kbd "C-c C-c") '(lambda ()
+						      (interactive)
+						      (TeX-command "LatexMk" 'TeX-master-file 0)))
+	    (define-key TeX-mode-map (kbd "C-c q") 'fill-using-punctuation)
+	    (define-key TeX-mode-map (kbd "C-c C-a") '(lambda ()
+						      (interactive)
+						      (TeX-command "View" 'TeX-master-file 0)))
 	    (setq auctex-latexmk-inherit-TeX-PDF-mode t)
 	    (setq-default TeX-command-default "LatexMk")
 	    (setq TeX-view-program-selection '((output-pdf "zathura")))
