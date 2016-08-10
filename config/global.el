@@ -155,6 +155,11 @@
                                  answer)))))))
 (global-set-key (kbd "C-c +") 'increment-number-decimal)
 
+(defun other-previous-window ()
+  (interactive)
+  (other-window -1))
+(global-set-key (kbd "C-x O") 'other-previous-window)
+
 ;; recenter horizontally
 (defun my-horizontal-recenter ()
   "make the point horizontally centered in the window"
