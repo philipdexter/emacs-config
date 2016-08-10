@@ -15,6 +15,15 @@
 
     (set-face-attribute 'tuareg-font-lock-operator-face nil :foreground "#5f5faf")
 
+    (defun my/ocaml-comment-insert (arg)
+      (interactive "P")
+      (insert "(*")
+      (when arg (insert "*"))
+      (insert "  *)")
+      (backward-char 3))
+
+    (define-key tuareg-mode-map (kbd "M-(") 'my/ocaml-comment-insert)
+
     (setq my/ocaml-loaded t))
 
 (defun ocaml-find-hook()
