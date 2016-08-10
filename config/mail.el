@@ -31,6 +31,8 @@
 
 (setq gnus-treat-display-smileys nil)
 
+(set-face-attribute 'gnus-summary-selected nil :background "white")
+
 (defun my/mail-demon ()
   (interactive)
   (gnus-demon-init)
