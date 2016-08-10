@@ -46,7 +46,11 @@
                                                                 (buffer-file-name)))
                                        "packages/"
                                        (symbol-name name)))
-                  (require name))))
+                  (let ((ct (current-time)))
+		    (cl-flet ((dt (time)
+				  (+ (* (car (cdr time)) 1000000) (car (cdr (cdr time))))))
+		      (require name)
+		      (message "load time %22s %d" name (- (dt (current-time)) (dt ct))))))))
 
 (add-to-list 'load-path
              (concat (file-name-directory load-file-name)
