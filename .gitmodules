@@ -79,3 +79,6 @@
 [submodule "packages/eww-lnum"]
 	path = packages/eww-lnum
 	url = http://github.com/m00natic/eww-lnum
+[submodule "packages/clojure-mode"]
+	path = packages/clojure-mode
+	url = http://github.com/clojure-emacs/clojure-mode
