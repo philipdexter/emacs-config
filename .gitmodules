@@ -82,3 +82,6 @@
 [submodule "packages/clojure-mode"]
 	path = packages/clojure-mode
 	url = http://github.com/clojure-emacs/clojure-mode
+[submodule "packages/elixir-mode"]
+	path = packages/elixir-mode
+	url = http://github.com/elixir-lang/emacs-elixir
