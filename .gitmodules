@@ -85,3 +85,6 @@
 [submodule "packages/elixir-mode"]
 	path = packages/elixir-mode
 	url = http://github.com/elixir-lang/emacs-elixir
+[submodule "packages/ranger"]
+	path = packages/ranger
+	url = git@github.com:ralesi/ranger.el

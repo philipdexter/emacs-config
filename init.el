@@ -14,7 +14,8 @@
     undo-tree
     writegood-mode
     expand-region
-    multiple-cursors))
+    multiple-cursors
+    ranger))
 
 ;; local config files
 (defvar configs
