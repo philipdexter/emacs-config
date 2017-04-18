@@ -88,3 +88,9 @@
 [submodule "packages/ranger"]
 	path = packages/ranger
 	url = git@github.com:ralesi/ranger.el
+[submodule "packages/adoc-mode"]
+	path = packages/adoc-mode
+	url = git@github.com:sensorflo/adoc-mode
+[submodule "packages/markup-faces"]
+	path = packages/markup-faces
+	url = git@github.com:sensorflo/markup-faces
