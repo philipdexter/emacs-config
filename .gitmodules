@@ -94,3 +94,6 @@
 [submodule "packages/markup-faces"]
 	path = packages/markup-faces
 	url = git@github.com:sensorflo/markup-faces
+[submodule "packages/fzf"]
+	path = packages/fzf
+	url = git://github.com/bling/fzf.el.git
