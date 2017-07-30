@@ -16,7 +16,8 @@
     expand-region
     multiple-cursors
     ranger
-    isearch+))
+    isearch+
+    fzf))
 
 ;; local config files
 (defvar configs
