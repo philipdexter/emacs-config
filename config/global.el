@@ -59,6 +59,10 @@
 
 ;; whitespace
 (setq-default show-trailing-whitespace t)
+(add-hook 'after-change-major-mode-hook
+	  (lambda ()
+	    (when (string-equal major-mode "term-mode")
+	      (setq show-trailing-whitespace nil))))
 (define-key global-map (kbd "M-F") 'forward-whitespace)
 (defun backward-whitespace (arg)
   (interactive "^p")
