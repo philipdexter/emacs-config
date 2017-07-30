@@ -1,6 +1,8 @@
 (setq user-mail-address "philip.dexter@gmail.com"
       user-full-name "Philip Dexter"
-      smtpmail-smtp-server "smtp.gmail.com")
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587
+      send-mail-function 'smtpmail-send-it)
 
 (setq gnus-select-method
       '(nnimap "gmail"
@@ -14,10 +16,7 @@
 		(nnimap-server-port 143)
 		(nnimap-stream starttls))))
 
-(setq smtpmail-smtp-service 587
-      gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
-
-(setq send-mail-function 'smtpmail-send-it)
+;; (setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
 
 (require 'bbdb-loaddefs "~/.emacs.d/packages/bbdb/lisp/bbdb-loaddefs.el")
 (bbdb-initialize 'gnus 'message)
