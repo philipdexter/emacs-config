@@ -15,7 +15,8 @@
     writegood-mode
     expand-region
     multiple-cursors
-    ranger))
+    ranger
+    isearch+))
 
 ;; local config files
 (defvar configs
