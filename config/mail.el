@@ -14,7 +14,11 @@
       '((nnimap "phfilip"
 		(nnimap-address "mail.phfilip.com")
 		(nnimap-server-port 143)
-		(nnimap-stream starttls))))
+		(nnimap-stream starttls))
+	(nnimap "runbox"
+		(nnimap-address "mail.runbox.com")
+		(nnimap-server-port 993)
+		(nnimap-stream ssl))))
 
 ;; (setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
 
