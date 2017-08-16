@@ -53,6 +53,6 @@
 (defun my/haskell-find-hook ()
   (let ((fn (buffer-file-name)))
     (when (string-match "\\.hs" fn)
-      (unless my/coq-loaded (my/load-haskell)))))
+      (unless my/haskell-loaded (my/load-haskell)))))
 
 (add-hook 'find-file-hooks 'my/haskell-find-hook)
