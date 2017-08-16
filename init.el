@@ -41,7 +41,8 @@
     "writegood"
     "expand"
     "multiple-cursors"
-    "eww"))
+    "eww"
+    "elixir"))
 
 (cl-loop for name in packages
       do (progn (unless (fboundp name)
