@@ -7,6 +7,7 @@
 ;; ido mode
 (ido-mode t)
 (setq ido-enable-flex-matching t)
+(setq ido-auto-merge-delay-time 1000) ; large number to effectively disable
 
 ;; require final newline
 (setq-default require-final-newline t)
