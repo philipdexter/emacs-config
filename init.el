@@ -16,7 +16,6 @@
     expand-region
     multiple-cursors
     ranger
-    isearch+
     fzf))
 
 ;; local config files

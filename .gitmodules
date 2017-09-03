@@ -97,6 +97,3 @@
 [submodule "packages/fzf"]
 	path = packages/fzf
 	url = git://github.com/bling/fzf.el.git
-[submodule "packages/isearch+"]
-	path = packages/isearch+
-	url = git://github.com/emacsmirror/isearch-plus.git
