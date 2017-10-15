@@ -41,6 +41,7 @@
     "expand"
     "multiple-cursors"
     "eww"
+    "erlang"
     "elixir"))
 
 (cl-loop for name in packages
