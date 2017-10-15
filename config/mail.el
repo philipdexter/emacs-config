@@ -11,11 +11,7 @@
 	       (nnimap-stream ssl)))
 
 (setq gnus-secondary-select-methods
-      '((nnimap "phfilip"
-		(nnimap-address "mail.phfilip.com")
-		(nnimap-server-port 143)
-		(nnimap-stream starttls))
-	(nnimap "runbox"
+      '((nnimap "runbox"
 		(nnimap-address "mail.runbox.com")
 		(nnimap-server-port 993)
 		(nnimap-stream ssl))))
