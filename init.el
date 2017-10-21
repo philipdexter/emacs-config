@@ -65,3 +65,4 @@
       do (load (concat (file-name-directory load-file-name)
                        "config/"
                        name ".el")))
+(put 'narrow-to-region 'disabled nil)
