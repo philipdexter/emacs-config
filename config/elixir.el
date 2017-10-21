@@ -8,6 +8,11 @@
   (require 'elixir-mode)
   (add-hook 'elixir-mode-hook (lambda ()
 				(setq indent-tabs-mode nil)))
+  (defun my/elixir-end ()
+    (interactive)
+    (insert "end")
+    (indent-for-tab-command))
+  (define-key elixir-mode-map (kbd "C-c ]") 'my/elixir-end)
   (elixir-mode))
 
 (defun my/elixir-find-hook ()
