@@ -6,7 +6,6 @@
     smex
     color-theme
     color-theme-solarized
-    markdown-mode
     dash
     s
     f
