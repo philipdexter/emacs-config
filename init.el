@@ -14,7 +14,6 @@
     writegood-mode
     expand-region
     multiple-cursors
-    ranger
     fzf))
 
 ;; local config files
