@@ -64,3 +64,11 @@
                        "config/"
                        name ".el")))
 (put 'narrow-to-region 'disabled nil)
+
+(defun new-scratch-buffer ()
+  (interactive)
+  (let ((buf (generate-new-buffer "my.scratch")))
+    (switch-to-buffer buf)
+    (setq buffer-offer-save t)
+    (lisp-interaction-mode)))
+(setq initial-scratch-message "(new-scratch-buffer)\n")
