@@ -10,7 +10,7 @@
 
 (defun my/markdown-find-hook ()
   (let ((fn (buffer-file-name)))
-    (when (string-match "\\.md" mfn)
+    (when (string-match "\\.md" fn)
       (unless my/markdown-loaded (my/load-markdown)))))
 
 (add-hook 'find-file-hooks 'my/markdown-find-hook)
