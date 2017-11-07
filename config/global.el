@@ -301,3 +301,6 @@
 (define-key input-decode-map "\e[52~" [(f38)])
 (define-key key-translation-map (kbd "C-<f6>") (kbd "C-M-%"))
 (define-key key-translation-map (kbd "<f38>") (kbd "C-M-%"))
+
+;; browse-kill-ring C-c y
+(global-set-key (kbd "C-c y") 'browse-kill-ring)

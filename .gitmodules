@@ -94,3 +94,6 @@
 [submodule "packages/fzf"]
 	path = packages/fzf
 	url = git://github.com/bling/fzf.el.git
+[submodule "packages/browse-kill-ring"]
+	path = packages/browse-kill-ring
+	url = https://github.com/browse-kill-ring/browse-kill-ring

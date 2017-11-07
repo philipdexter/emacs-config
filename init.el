@@ -14,7 +14,8 @@
     writegood-mode
     expand-region
     multiple-cursors
-    fzf))
+    fzf
+    browse-kill-ring))
 
 ;; local config files
 (defvar configs
