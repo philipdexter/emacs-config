@@ -12,7 +12,6 @@
     let-alist
     undo-tree
     writegood-mode
-    expand-region
     multiple-cursors
     fzf
     browse-kill-ring))
@@ -37,7 +36,6 @@
     "org"
     "undo-tree"
     "writegood"
-    "expand"
     "multiple-cursors"
     "eww"
     "erlang"
