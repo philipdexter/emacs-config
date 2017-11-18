@@ -47,4 +47,4 @@
 	    (setq-default TeX-command-default "LatexMk")
 	    (setq TeX-view-program-selection '((output-pdf "zathura")))
 	    (setq TeX-view-program-list '(("zathura" ("zathura" " --fork" " %o"))))
-	    (setq-default TeX-master "paper-sigplan")))
+	    (setq-default TeX-master (car (split-string (buffer-name) "\\.")))))
