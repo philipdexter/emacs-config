@@ -39,7 +39,8 @@
     "multiple-cursors"
     "eww"
     "erlang"
-    "elixir"))
+    "elixir"
+    "factor"))
 
 (cl-loop for name in packages
       do (progn (unless (fboundp name)
