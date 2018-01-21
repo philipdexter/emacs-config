@@ -304,3 +304,8 @@
 
 ;; browse-kill-ring C-c y
 (global-set-key (kbd "C-c y") 'browse-kill-ring)
+
+(defun fzf-at-git ()
+  (interactive)
+  (fzf/start
+   (locate-dominating-file "." ".git")))
