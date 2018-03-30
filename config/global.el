@@ -309,3 +309,4 @@
   (interactive)
   (fzf/start
    (locate-dominating-file "." ".git")))
+(global-set-key (kbd "C-x C-l") 'fzf-at-git)
