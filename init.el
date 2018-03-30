@@ -2,8 +2,7 @@
 
 ;; locally installed packages
 (defvar packages
-  '(ace-jump-mode
-    smex
+  '(smex
     color-theme
     color-theme-solarized
     dash
