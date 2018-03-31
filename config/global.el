@@ -179,8 +179,6 @@
 
 ;; global key bindings
 
-(define-key global-map (kbd "C-c 8") 'ace-jump-mode)
-(define-key global-map (kbd "C-c C-8") 'ace-jump-mode)
 (define-key global-map (kbd "C-x r t") 'string-insert-rectangle)
 
 ;; ag
