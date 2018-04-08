@@ -3,8 +3,6 @@
 ;; locally installed packages
 (defvar packages
   '(smex
-    color-theme
-    color-theme-solarized
     dash
     s
     f
@@ -21,7 +19,6 @@
     "haskell"
     "latex"
     "smex"
-    "color-theme"
     "markdown"
     "java"
     "idris"
