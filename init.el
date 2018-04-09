@@ -35,6 +35,7 @@
     "multiple-cursors"
     "eww"
     "erlang"
+    "asciidoc"
     "elixir"
     "factor"))
 
