@@ -20,6 +20,10 @@
 (scroll-bar-mode -1)
 (set-face-attribute 'default nil :height 65)
 
+;; turn off italics and bold
+(set-face-italic-p 'italic nil)
+(set-face-bold-p 'bold nil)
+
 ;; turn off electric-indent-mode
 (set-default 'electric-indent-mode nil)
 
@@ -246,34 +250,34 @@
 		 '(:eval (when buffer-read-only
 			   "%%"))
 
-		 '(:eval (propertize "%b" 'face '(:background "orange red" :foreground "color-16")))
+		 '(:eval (propertize "%b" 'face '(:background "black" :foreground "bright red")))
 
-		 (propertize " %02l" 'face '(:background "dim gray" :foreground "color-16"))
-		 (propertize "," 'face '(:background "dim gray" :foreground "color-16"))
-		 (propertize "%02c" 'face '(:background "dim gray" :foreground "color-16"))
+		 (propertize " %02l" 'face '(:background "black" :foreground "yellow"))
+		 (propertize "," 'face '(:background "black" :foreground "yellow"))
+		 (propertize "%02c" 'face '(:background "black" :foreground "yellow"))
 
-		 (propertize " " 'face '(:background "dim gray" :foreground "color-16"))
-		 (propertize "%p " 'face '(:background "dim gray" :foreground "color-16"))
+		 (propertize " " 'face '(:background "black" :foreground "yellow"))
+		 (propertize "%p " 'face '(:background "black" :foreground "yellow"))
 
 		 ;;(propertize "<" 'face '(:background "dark magenta" :foreground "salmon"))
-		 '(:eval (propertize "%m" 'face '(:foreground "#fff" :background "#003580")))
+		 '(:eval (propertize "%m" 'face '(:foreground "blue" :background "black")))
 		 ;;(propertize "> " 'face '(:background "dark magenta" :foreground "salmon"))
 
-		 (propertize " // " 'face '(:background "dim gray" :foreground "color-16"))
+		 (propertize " // " 'face '(:background "black" :foreground "yellow"))
 
-		 `(:propertize ("" minor-mode-alist) face (:foreground "#005b99" :background "#fcd116"))
+		 `(:propertize ("" minor-mode-alist) face (:foreground "magenta" :background "black"))
 
-		 (propertize "    " 'face '(:foreground "color-16"))
+		 (propertize "    " 'face '(:background "black"))
 		 '(:eval global-mode-string)
-		 (propertize "/" 'face '(:foreground "color-16" :background "dim gray"))
+		 (propertize "/" 'face '(:foreground "yellow" :background "black"))
 		 '(:eval mode-line-process)
-		 (propertize "    " 'face '(:foreground "color-16"))
+		 (propertize "    " 'face '(:background "black"))
 
 		 (propertize "+" 'face '(:foreground "white" :background "#003580"))
 		 (propertize "+" 'face '(:foreground "#005b99" :background "#fcd116"))
 
 
-		 (propertize "%-" 'face '(:background "dim gray" :foreground "color-16")))))
+		 (propertize "%-" 'face '(:background "black" :foreground "black")))))
 
 
 ;; Swap recursive edit stuff
