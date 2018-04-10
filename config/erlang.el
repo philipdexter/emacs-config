@@ -7,6 +7,7 @@
   (setq exec-path (cons "/opt/erlang/bin" exec-path))
   (require 'erlang-start)
   (erlang-mode)
+  (set-face-attribute 'erlang-font-lock-exported-function-name-face nil :foreground "yellow")
   (setq indent-tabs-mode nil)
   (setq my/erlang-loaded t))
 

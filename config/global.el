@@ -20,6 +20,8 @@
 (scroll-bar-mode -1)
 (set-face-attribute 'default nil :height 65)
 
+(set-face-attribute 'region nil :background "black")
+
 ;; turn off italics and bold
 (set-face-italic-p 'italic nil)
 (set-face-bold-p 'bold nil)
