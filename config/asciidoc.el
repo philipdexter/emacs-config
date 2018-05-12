@@ -15,7 +15,8 @@
   ;; (set-face-attribute 'markup-typewriter-face nil :background "black" :foreground "bright red")
   ;; (set-face-attribute 'markup-meta-face nil :background "black" :foreground "bright red")
 
-  (global-set-key (kbd "C-c C-c") (lambda () (interactive) (compile (concat "asciidoctor -r asciidoctor-diagram " (buffer-name))))))
+  (global-set-key (kbd "C-c C-c") (lambda () (interactive) (compile (concat "asciidoctor -r asciidoctor-diagram " (buffer-name)))))
+  (global-set-key (kbd "C-c C-a") (lambda () (interactive) (shell-command (concat "firefox " (concat (file-name-sans-extension (buffer-name)) ".html"))))))
 
 (defun my/asciidoc-find-hook ()
   (let ((fn (buffer-file-name)))
