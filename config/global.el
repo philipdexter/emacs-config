@@ -275,3 +275,16 @@
   (fzf/start
    (locate-dominating-file "." ".git")))
 (global-set-key (kbd "C-x C-l") 'fzf-at-git)
+
+
+;; auto close compilation window if successful
+(defun bury-compile-buffer-if-successful (buf str)
+  (if (null (string-match ".*exited abnormally.*" str))
+      ;;no errors, make the compilation window go away in a few seconds
+      (progn
+	(run-at-time
+	 "1 sec" nil 'delete-windows-on
+	 (get-buffer-create "*compilation*"))
+	(message "No Compilation Errors!"))))
+(add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
+
