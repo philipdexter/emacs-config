@@ -4,9 +4,6 @@
 [submodule "packages/smex"]
 	path = packages/smex
 	url = git://github.com/nonsequitur/smex.git
-[submodule "packages/color-theme-solarized"]
-	path = packages/color-theme-solarized
-	url = git://github.com/sellout/emacs-color-theme-solarized.git
 [submodule "packages/scala-mode2"]
 	path = packages/scala-mode2
 	url = git://github.com/hvesalai/scala-mode2.git
