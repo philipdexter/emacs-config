@@ -8,6 +8,8 @@
   (require 'elixir-mode)
   (add-hook 'elixir-mode-hook (lambda ()
 				(setq indent-tabs-mode nil)))
+  (set-face-attribute 'elixir-atom-face nil :foreground "brightmagenta")
+  (set-face-attribute 'font-lock-type-face nil :foreground "cyan")
   (defun my/elixir-end ()
     (interactive)
     (insert "end")

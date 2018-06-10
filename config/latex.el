@@ -28,7 +28,7 @@
   ;; (set-face-attribute 'font-latex-bold-face nil :foreground "magenta")
   ;; (set-face-attribute 'font-latex-sectioning-2-face nil :foreground "color-206")
   ;; (set-face-attribute 'font-latex-sectioning-3-face nil :foreground "color-208")
-  ;; (set-face-attribute 'font-latex-sectioning-5-face nil :foreground "color-214")
+  (set-face-attribute 'font-latex-sectioning-5-face nil :foreground "yellow")
   ;; (set-face-attribute 'font-latex-math-face nil :foreground "color-41")
   ;; (set-face-attribute 'font-latex-warning-face nil :foreground "white")
   (define-key TeX-mode-map (kbd "M-J") '(lambda ()

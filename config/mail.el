@@ -24,6 +24,10 @@
 (setq fill-flowed-display-column nil)
 (add-hook 'gnus-article-mode-hook
 	  (lambda ()
+	    (custom-set-faces
+	     '(gnus-cite-1 ((t (:foreground "blue")))))
+	    ;(set-face-attribute 'gnus-cite-1 nil :foreground "blue")
+	    ;(auto-fill-mode nil)
 	    (setq
 	     truncate-lines t
 	     word-wrap nil)))
@@ -31,6 +35,7 @@
 (setq gnus-treat-display-smileys nil)
 
 ;(set-face-attribute 'gnus-summary-selected nil :background "white")
+;(set-face-attribute 'gnus-cite-1 nil :foreground "blue")
 
 (defun my/mail-demon ()
   (interactive)

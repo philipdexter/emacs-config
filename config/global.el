@@ -21,6 +21,9 @@
 (set-face-attribute 'default nil :height 65)
 
 (set-face-attribute 'region nil :background "black")
+(set-face-attribute 'font-lock-keyword-face nil :foreground "red")
+
+(set-face-attribute 'vertical-border nil :background "black" :foreground "bright cyan")
 
 ;; turn off italics and bold
 (set-face-italic-p 'italic nil)
@@ -247,7 +250,7 @@
 		 "%e"
 
 		 '(:eval (when (buffer-modified-p)
-			   (propertize "*" 'face '(:background "lawn green" :foreground "color-16"))))
+			   (propertize "*" 'face '(:background "bright cyan" :foreground "black"))))
 
 		 '(:eval (when buffer-read-only
 			   "%%"))
@@ -275,8 +278,8 @@
 		 '(:eval mode-line-process)
 		 (propertize "    " 'face '(:background "black"))
 
-		 (propertize "+" 'face '(:foreground "white" :background "#003580"))
-		 (propertize "+" 'face '(:foreground "#005b99" :background "#fcd116"))
+		 (propertize "+" 'face '(:background "white" :foreground "#003580"))
+		 (propertize "+" 'face '(:background "#005b99" :foreground "#fcd116"))
 
 
 		 (propertize "%-" 'face '(:background "black" :foreground "black")))))
