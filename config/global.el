@@ -109,48 +109,6 @@
   (let ((the-url (thing-at-point-url-at-point)))
     (async-shell-command (format "curl '%s' | zathura -" the-url))))
 
-(defun my/go-light ()
-  (interactive)
-  (if window-system
-      (set-face-attribute 'default nil :background "#ffffd7")
-    (set-face-attribute 'default nil :background "color-230")))
-(defun my/go-dark ()
-  (interactive)
-  (if window-system
-      (set-face-attribute 'default nil :background "black")
-    (set-face-attribute 'default nil :background "color-16")))
-
-
-;; relative line numbers
-(defvar my-linum-format-string "%3d")
-
-(add-hook 'linum-before-numbering-hook 'my-linum-get-format-string)
-
-(defun my-linum-get-format-string ()
-  (let* ((width (1+ (length (number-to-string
-                             (count-lines (point-min) (point-max))))))
-         (format (concat "%" (number-to-string width) "d")))
-    (setq my-linum-format-string format)))
-
-(defvar my-linum-current-line-number 0)
-
-(setq linum-format 'my-linum-relative-line-numbers)
-
-(defun my-linum-relative-line-numbers (line-number)
-  (let ((offset (- line-number my-linum-current-line-number)))
-    (propertize (format my-linum-format-string
-			(if (= 0 offset)
-			    line-number
-			    (abs offset))
-			) 'face (if (= 0 offset)
-				    'outline-7
-				    'idris-semantic-bound-face))))
-
-(defadvice linum-update (around my-linum-update)
-  (let ((my-linum-current-line-number (line-number-at-pos)))
-    ad-do-it))
-(ad-activate 'linum-update)
-
 ;; increment numbers
 (defun increment-number-decimal (&optional arg)
   "Increment the number forward from point by 'arg'."
