@@ -88,3 +88,9 @@
 [submodule "packages/paredit"]
 	path = packages/paredit
 	url = git://github.com/emacsmirror/paredit.git
+[submodule "packages/magit-popup"]
+	path = packages/magit-popup
+	url = git://github.com/magit/magit-popup.git
+[submodule "packages/ghub"]
+	path = packages/ghub
+	url = git://github.com/magit/ghub.git

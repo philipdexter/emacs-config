@@ -11,6 +11,8 @@
   (if my/magit-loaded
       (magit-status)
     (progn
+      (add-to-list 'load-path "~/.emacs.d/packages/magit-popup")
+      (add-to-list 'load-path "~/.emacs.d/packages/ghub")
       (require 'magit)
       (setq my/magit-loaded t)
       (load-magit))))
